@@ -8,7 +8,7 @@ Vous pouvez utiliser ce projet comme base pour le vôtre. **Ne l'utilisez pas di
 
 Le script est pensé pour cette configuration :
 
-- Serveur sous Ubuntu 16.04 en anglais ;
-- [Caddy](https://github.com/mholt/caddy) en guise de serveur ;
-- PHP 7.1 ;
+- Ubuntu 16.04 en anglais ;
+- [Caddy](https://github.com/mholt/caddy) en guise de serveur web ;
+- PHP 7.1 et MariaDB 10.1 ;
 - WordPress.
