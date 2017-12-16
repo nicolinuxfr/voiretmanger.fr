@@ -1,0 +1,62 @@
+www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicoflo.fr {
+    redir https://voiretmanger.fr{uri}
+}
+
+voiretmanger.fr {
+    root sites/voiretmanger
+    log logs/voiretmanger/access.log {
+	rotate_size 50  # Rotate after 50 MB
+	rotate_age  90  # Keep rotated files for 90 days
+	rotate_keep 20  # Keep at most 20 log files
+	rotate_compress
+    }
+
+    errors logs/voiretmanger/error.log
+
+    gzip
+
+    # PHP-FPM with Unix socket
+    fastcgi / /var/run/php/php7.1-fpm.sock php
+
+    # Redirect personnels
+	redir /a-propos/publicite /soutien
+	redir /archives/carte-des-restaurants /a-manger
+
+    header / {
+        # Enable HTTP Strict Transport Security (HSTS) to force clients to always
+        # connect via HTTPS (do not use if only testing)
+        Strict-Transport-Security "max-age=31536000;"
+        # Enable cross-site filter (XSS) and tell browser to block detected attacks
+        X-XSS-Protection "1; mode=block"
+        # Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
+        X-Content-Type-Options "nosniff"
+        # Disallow the site to be rendered within a frame (clickjacking protection)
+        #X-Frame-Options "DENY"
+	}
+
+    internal /wp-config.php
+
+    header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
+    header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
+    header favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
+
+    # Routing for WordPress
+	rewrite / {
+		if {path} not_match ^\/wp-admin
+		to  {path} {path}/ /index.php?{query}
+	}
+}
+
+www.files.voiretmanger.fr {
+    redir https://files.voiretmanger.fr{uri}
+}
+
+files.voiretmanger.fr {
+    root sites/files
+    log logs/files/access.log
+    errors logs/files/error.log
+
+     gzip
+
+     browse
+}
