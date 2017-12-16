@@ -12,3 +12,24 @@ Le script est pensé pour cette configuration :
 - [Caddy](https://github.com/mholt/caddy) en guise de serveur web ;
 - PHP 7.1 et MariaDB 10.1 ;
 - WordPress.
+
+Son rôle est d'installer tous les programmes nécessaires et créer des liens symboliques pour tous les fichiers de configuration contenus dans ce dépôt.
+
+## Mode d'emploi
+
+Voici les étapes à suivre sur un serveur vide : 
+
+### Récupérer le dépôt
+
+Cloner le dépôt n'importe où sur le serveur : 
+
+     git clone https://github.com/nicolinuxfr/config-server.git /home/config
+
+### Lancer le script
+
+Certaines opérations nécessitent les permissions root, d'où le `sudo`. 
+
+    sudo /home/config/tools/install.sh
+
+## Crédits
+
