@@ -38,30 +38,22 @@ wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key add -
 apt-get update
 apt-get install goaccess
 
-echo "zsh et oh-my-zsh (Shell 2.0)"
-apt-get install zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-
 echo "======== Création des dossiers nécessaires ========"
 mkdir -p /etc/caddy/
 
 
 echo "======== Installation des fichiers de configuration ========"
-ln -s /home/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
-ln -sf /home/config/etc/php/7.1/fpm/php.ini /etc/php/7.1/fpm/php.ini
-ln -sf /home/config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
-ln -s /home/config/home/.alias ~/.alias
-ln -sf /home/config/home/.zshrc ~/.zshrc
+ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
+ln -sf ~/config/etc/php/7.1/fpm/php.ini /etc/php/7.1/fpm/php.ini
+ln -sf ~/config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
+
 
 echo "======== Création du service pour Caddy ========"
 systemctl enable /home/config/etc/systemd/system/caddy.service
 
-echo "======== Installation terminée ========"
-echo "Voulez-vous redémarrer le serveur ?"
-select yn in "Oui" "Non"; do
-    case $yn in
-        Yes ) reboot; break;;
-        No ) exit;;
-    esac
-done
+# À la fin, puisque oh-my-zsh interrompt le processus
+echo "zsh et oh-my-zsh (Shell 2.0)"
+apt-get install zsh
+ln -s ~/config/home/.alias ~/.alias
+ln -sf ~/config/home/.zshrc ~/.zshrc
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
