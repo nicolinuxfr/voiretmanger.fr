@@ -6,30 +6,37 @@ Vous pouvez utiliser ce projet comme base pour le vôtre. **Ne l'utilisez pas di
 
 ## Que fait le script d'installation ?
 
-Le script est pensé pour cette configuration :
+Le script installe ces outils sur une base d'Ubuntu 16.04 :
 
-- Ubuntu 16.04 en anglais ;
-- [Caddy](https://github.com/mholt/caddy) en guise de serveur web ;
-- PHP 7.1 et MariaDB 10.1 ;
-- WordPress.
+- Serveur web :
+    - [Caddy](https://github.com/mholt/caddy) ;
+    - PHP 7.1 ;
+    - MariaDB 10.1 ;
+- Terminal :
+    - ZSH et oh-my-zsh ;
+    - htop ;
+    - micro ;
+    - goaccess.
 
-Son rôle est d'installer tous les programmes nécessaires et créer des liens symboliques pour tous les fichiers de configuration contenus dans ce dépôt.
+Il installe aussi les fichiers de configuration stockés dans le sous-dossier `/etc/`, grâce à des liens symboliques qui simplifient ensuite les mises à jour.
 
 ## Mode d'emploi
 
-Voici les étapes à suivre sur un serveur vide : 
+### Prérequis
+
+Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 16.04 et d'un compte non root. Pour la configuration initiale de l'utilisateur, vous pouvez [suivre ce tutoriel](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
 
 ### Récupérer le dépôt
 
-Cloner le dépôt n'importe où sur le serveur : 
+Vous pouvez cloner le dépôt n'importe où sur le serveur, par simplicité je le fais depuis le dossier personnel de l'utilisateur.
 
-     git clone https://github.com/nicolinuxfr/config-server.git /home/config
+     git clone https://github.com/nicolinuxfr/config-server.git config
 
 ### Lancer le script
 
 Certaines opérations nécessitent les permissions root, d'où le `sudo`. 
 
-    sudo /home/config/tools/install.sh
+    sudo config/tools/install.sh
 
 ## Crédits
 
