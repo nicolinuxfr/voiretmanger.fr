@@ -28,15 +28,15 @@ Le script d'installation est conçu pour être exécuté à partir d'un serveur 
 
 ### Récupérer le dépôt
 
-Vous pouvez cloner le dépôt n'importe où sur le serveur, par simplicité je le fais depuis le dossier personnel de l'utilisateur.
+Clonez le dépôt à partir du dossier utilisateur qui servira à exécuter le script. Les configurations seront aussi stockées dans ce dossier et liées vers ce dossier, donc il ne faudra plus y toucher.
 
-     git clone https://github.com/nicolinuxfr/config-server.git config
+    git clone https://github.com/nicolinuxfr/config-server.git ~/config
 
 ### Lancer le script
 
 Certaines opérations nécessitent les permissions root, d'où le `sudo`. 
 
-    sudo config/tools/install.sh
+    sudo ~/config/tools/install.sh
 
 ## Crédits
 
