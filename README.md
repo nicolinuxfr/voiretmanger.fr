@@ -38,5 +38,6 @@ Certaines opérations nécessitent les permissions root, d'où le `sudo`.
 
     sudo ~/config/tools/install.sh
 
-## Crédits
+⚠️ **ATTENTION** ⚠️
 
+Ne relancez pas le script une deuxième fois sur un serveur !
