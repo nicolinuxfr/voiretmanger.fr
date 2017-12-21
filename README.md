@@ -22,9 +22,9 @@ Il installe aussi les fichiers de configuration stockés dans le sous-dossier `/
 
 ## Mode d'emploi
 
-### Prérequis
+### Configuration initiale du serveur
 
-Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 16.04 et d'un compte non root. Pour la configuration initiale de l'utilisateur, vous pouvez [suivre ce tutoriel](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
+Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 16.04 et d'un compte non root. Pour la configuration initiale de l'utilisateur, vous pouvez [suivre ce tutoriel](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
 
 Voici les commandes que je saisis sur mes VPS : 
 
