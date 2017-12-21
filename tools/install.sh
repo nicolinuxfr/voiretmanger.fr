@@ -49,7 +49,7 @@ ln -sf ~/config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 
 
 echo "======== Création du service pour Caddy ========"
-systemctl enable /home/config/etc/systemd/system/caddy.service
+systemctl enable ~/config/etc/systemd/system/caddy.service
 
 # À la fin, puisque oh-my-zsh interrompt le processus
 echo "zsh et oh-my-zsh (Shell 2.0)"
