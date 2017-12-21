@@ -26,6 +26,20 @@ Il installe aussi les fichiers de configuration stockés dans le sous-dossier `/
 
 Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 16.04 et d'un compte non root. Pour la configuration initiale de l'utilisateur, vous pouvez [suivre ce tutoriel](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
 
+Voici les commandes que je saisis sur mes VPS : 
+
+- Connexion en root : `ssh root@IP.IP.IP.IP` ;
+- Ajout utilisateur : `adduser nicolas` ;
+- Droit root : `usermod -aG sudo nicolas` ;
+- Envoi du mot de passe utilisateur depuis l'ordinateur local : `ssh-copy-id nicolas@IP.IP.IP.IP` ;
+- Connexion avec l'utilisateur : `ssh nicolas@IP.IP.IP.IP` ;
+- Blocage connexion root : 
+    - édition configuration : `sudo nano /etc/ssh/sshd_config` 
+    - modification de la ligne `PermitRootLogin yes` > `PermitRootLogin no` ;
+    - redémarrage serveur SSH : `sudo systemctl reload sshd` ;
+- Vérifications : fermer la session et la rouvrir pour voir si tout est correct.
+
+
 ### Récupérer le dépôt
 
 Clonez le dépôt à partir du dossier utilisateur qui servira à exécuter le script. Les configurations seront aussi stockées dans ce dossier et liées vers ce dossier, donc il ne faudra plus y toucher.
