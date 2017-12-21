@@ -38,22 +38,22 @@ wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key add -
 apt-get update
 apt-get install goaccess
 
+echo "zsh et oh-my-zsh (Shell 2.0)"
+apt-get install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
+  echo "Could not install Oh My Zsh" >/dev/stderr
+  exit 1
+}
+ln -s ~/config/home/.alias ~/.alias
+ln -sf ~/config/home/.zshrc ~/.zshrc
+
 echo "======== Création des dossiers nécessaires ========"
 mkdir -p /etc/caddy/
-
 
 echo "======== Installation des fichiers de configuration ========"
 ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
 ln -sf ~/config/etc/php/7.1/fpm/php.ini /etc/php/7.1/fpm/php.ini
 ln -sf ~/config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 
-
 echo "======== Création du service pour Caddy ========"
 systemctl enable ~/config/etc/systemd/system/caddy.service
-
-# À la fin, puisque oh-my-zsh interrompt le processus
-echo "zsh et oh-my-zsh (Shell 2.0)"
-apt-get install zsh
-ln -s ~/config/home/.alias ~/.alias
-ln -sf ~/config/home/.zshrc ~/.zshrc
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
