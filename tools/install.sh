@@ -9,11 +9,11 @@ apt-get update
 apt-get upgrade
 apt-get dist-upgrade
 
-echo "======== Installation de PHP 7.1 ========"
+echo "======== Installation de PHP 7.2 ========"
 add-apt-repository -y ppa:ondrej/php
 apt-get update
-apt-get install php7.1-fpm php7.1-mysql php7.1-curl php7.1-gd php7.1-mbstring php7.1-mcrypt php7.1-xml php7.1-xmlrpc
-systemctl restart php7.1-fpm
+apt-get install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc
+systemctl restart php7.2-fpm
 
 echo "======== Installation de MariaDB 10.2 ========"
 apt-get install software-properties-common
@@ -57,8 +57,8 @@ mkdir -p /var/www/files.voiretmanger.fr
 
 echo "======== Installation des fichiers de configuration ========"
 ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
-ln -sf ~/config/etc/php/7.1/fpm/php.ini /etc/php/7.1/fpm/php.ini
-ln -sf ~/config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
+ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
+ln -sf ~/config/etc/php/7.2/fpm/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
 
 echo "======== Création du service pour Caddy ========"
 systemctl enable ~/config/etc/systemd/system/caddy.service
