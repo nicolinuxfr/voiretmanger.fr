@@ -11,3 +11,4 @@ alias logs="tail -f /home/www/logs/voiretmanger/access.log | grep 'HTTP/2.0'"
 alias caddymaj="curl https://getcaddy.com | bash -s personal && caddysetcap && caddyreload"
 alias tail="sudo tail -f"
 alias caddyreload="sudo service caddy reload"
+alias majConf='cd /home/nicolas/config && git pull origin master'
