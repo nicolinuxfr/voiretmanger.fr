@@ -10,8 +10,8 @@ Le script installe ces outils sur une base d'Ubuntu 16.04 :
 
 - Serveur web :
     - [Caddy](https://github.com/mholt/caddy) ;
-    - PHP 7.1 ;
-    - MariaDB 10.1 ;
+    - PHP 7.2 ;
+    - MariaDB 10.2 ;
 - Terminal :
     - ZSH et oh-my-zsh ;
     - htop ;
@@ -19,6 +19,11 @@ Le script installe ces outils sur une base d'Ubuntu 16.04 :
     - goaccess.
 
 Il installe aussi les fichiers de configuration stockés dans le sous-dossier `/etc/`, grâce à des liens symboliques qui simplifient ensuite les mises à jour.
+
+Il crée enfin les dossiers nécessaires pour héberger les sites et les logs : 
+
+- Données : dans `/var/www/ndd.fr` ;
+- Logs : dans `/var/log/caddy/`.
 
 ## Mode d'emploi
 
