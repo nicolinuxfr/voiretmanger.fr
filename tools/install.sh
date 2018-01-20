@@ -89,4 +89,4 @@ echo "\n======== Script d'installation terminé ========\n"
 echo "Ouvrez une nouvelle session avec ce même compte pour bénéficier de tous les changements.\n "
 echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant ces commandes depuis le précédent serveur : \n"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e \"ssh -T -o Compression=no -x\" CHEMIN/FICHIERS/* nicolas@$IP:/var/www/voiretmanger.fr"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e \"ssh -T -o Compression=no -x\" CHEMIN/FICHIERS/* nicolas@$IP:/var/www"
