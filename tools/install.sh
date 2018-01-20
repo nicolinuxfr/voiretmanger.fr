@@ -24,6 +24,7 @@ apt install mariadb-server
 
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
+sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
 echo "======== Installation des quelques outils ========"
 echo "Micro (éditeur de documents)"
@@ -48,7 +49,11 @@ ln -s ~/config/home/.alias ~/.alias
 ln -sf ~/config/home/.zshrc ~/.zshrc
 
 echo "======== Création des dossiers nécessaires ========"
-mkdir -p /etc/caddy/
+mkdir -p /etc/caddy
+mkdir -p /etc/ssl/caddy
+mkdir -p /var/log/caddy
+mkdir -p /var/www/voiretmanger.fr
+mkdir -p /var/www/files.voiretmanger.fr
 
 echo "======== Installation des fichiers de configuration ========"
 ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
