@@ -10,4 +10,4 @@ alias majwpcli="cd /home/www/sites/voiretmanger/ && sudo wp cli update --allow-r
 alias logs="tail -f /home/www/logs/voiretmanger/access.log | grep 'HTTP/2.0'"
 alias caddymaj="curl https://getcaddy.com | bash -s personal && caddysetcap && caddyreload"
 alias tail="sudo tail -f"
-alias caddyreload="pkill -USR1 caddy && caddystatus"
+alias caddyreload="sudo service caddy reload"
