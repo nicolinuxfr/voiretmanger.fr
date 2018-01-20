@@ -85,6 +85,5 @@ source $HOME/.alias
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-export iterm2_hostname=voiretmanger.fr:1990
+export iterm2_hostname=voiretmanger.fr
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
