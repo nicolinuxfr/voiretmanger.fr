@@ -58,7 +58,6 @@ mkdir -p /var/www/files.voiretmanger.fr
 echo "======== Installation des fichiers de configuration ========"
 ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
 ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
-ln -sf ~/config/etc/php/7.2/fpm/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
 
 echo "======== Création du service pour Caddy ========"
 systemctl enable ~/config/etc/systemd/system/caddy.service
