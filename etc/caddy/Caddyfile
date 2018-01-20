@@ -2,6 +2,7 @@ www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicof
     redir https://voiretmanger.fr{uri}/
 }
 
+
 voiretmanger.fr {
     root /var/www/voiretmanger.fr
     log /var/log/caddy/voiretmanger.access.log {
