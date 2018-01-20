@@ -3,7 +3,9 @@
 # Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 16.06.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
-# Téléchargements
+# Nécessaire pour éviter les erreurs de LOCALE par la suite
+locale-gen "fr_FR.UTF-8"
+
 echo "======== Mise à jour initiale ========"
 apt-get update
 apt-get -y upgrade
