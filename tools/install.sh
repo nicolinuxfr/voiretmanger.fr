@@ -29,7 +29,9 @@ apt-get -y install mariadb-server
 
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
-sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
+chown root:root /usr/local/bin/caddy
+chmod 755 /usr/local/bin/caddy
+setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
 echo "======== Installation des quelques outils ========"
 echo "Micro (éditeur de documents)"
@@ -58,10 +60,16 @@ sudo -i -u nicolas chsh -s $(which zsh)
 
 echo "======== Création des dossiers nécessaires ========"
 mkdir -p /etc/caddy
+chown -R root:www-data /etc/caddy
 mkdir -p /etc/ssl/caddy
+chown -R root:www-data /etc/ssl/caddy
+chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
 mkdir -p /var/www/voiretmanger.fr
 mkdir -p /var/www/files.voiretmanger.fr
+chown -R www-data:www-data /var/www
+chmod -R 555 /var/www
+
 
 echo "======== Installation des fichiers de configuration ========"
 ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
@@ -70,3 +78,15 @@ ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
 echo "======== Création du service pour Caddy ========"
 systemctl enable ~/config/etc/systemd/system/caddy.service
 
+# Nettoyages et correction permissions
+apt-get -y autoremove
+chown -R nicolas:nicolas /home/nicolas/.*
+
+# Préparation de la suite
+IP=`curl -sS ipecho.net/plain`
+
+echo "\n======== Script d'installation terminé ========\n"
+echo "Ouvrez une nouvelle session avec ce même compte pour bénéficier de tous les changements.\n "
+echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant ces commandes depuis le précédent serveur : \n"
+
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e \"ssh -T -o Compression=no -x\" CHEMIN/FICHIERS/* nicolas@$IP:/var/www/voiretmanger.fr"
