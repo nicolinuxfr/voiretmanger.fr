@@ -12,11 +12,12 @@ Le script installe ces outils sur une base d'Ubuntu 16.04 :
     - [Caddy](https://github.com/mholt/caddy) ;
     - PHP 7.2 ;
     - MariaDB 10.2 ;
+    - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :
-    - ZSH et oh-my-zsh ;
-    - htop ;
-    - micro ;
-    - goaccess.
+    - ZSH et [oh-my-zsh](http://ohmyz.sh) ;
+    - [htop](http://hisham.hm/htop/) ;
+    - [micro](https://micro-editor.github.io) ;
+    - [goaccess](https://goaccess.io).
 
 Il installe aussi les fichiers de configuration stockés dans le sous-dossier `/etc/`, grâce à des liens symboliques qui simplifient ensuite les mises à jour.
 
