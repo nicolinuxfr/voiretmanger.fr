@@ -1,7 +1,9 @@
 #!/bin/sh
+# Script d'optimisation et de sauvegarde de la base de données. Repose sur WP-CLI. 
+
 DATE=`date +%Y-%m-%d`
 
-# Script d'optimisation et de sauvegarde de la base de données. Repose sur WP-CLI. 
+echo "Optimisation et sauvegarde de la base de données : $DATE"
 
 # Optimisations (basé sur https://gist.github.com/lukecav/66f1039edcd2827fd1bde82dce86a2be)
 wp transient delete --expired 
