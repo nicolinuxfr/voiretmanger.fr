@@ -6,10 +6,23 @@
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "fr_FR.UTF-8"
 
+
 echo "======== Mise à jour initiale ========"
 apt-get update
 apt-get -y upgrade
 apt-get -y dist-upgrade
+
+echo "======== Création des dossiers nécessaires ========"
+mkdir -p /etc/caddy
+chown -R root:www-data /etc/caddy
+mkdir -p /etc/ssl/caddy
+chown -R root:www-data /etc/ssl/caddy
+chmod 0770 /etc/ssl/caddy
+mkdir -p /var/log/caddy
+mkdir -p /var/www/voiretmanger.fr
+mkdir -p /var/www/files.voiretmanger.fr
+chown -R www-data:www-data /var/www
+chmod -R 555 /var/www
 
 echo "======== Installation de PHP 7.2 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
@@ -19,6 +32,10 @@ apt-get -y install launchpad-getkeys
 apt-get -y install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc
 launchpad-getkeys
 systemctl restart php7.2-fpm
+
+# Fichier de configuration
+# ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
+
 
 echo "======== Installation de MariaDB 10.2 ========"
 apt-get -y install software-properties-common
@@ -31,7 +48,24 @@ echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
 chown root:root /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
+
+# Correction autorisations pour utiliser les ports 80 et 443
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
+
+# Fichier de configuration
+ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
+
+# Création du service
+systemctl enable ~/config/etc/systemd/system/caddy.service
+
+echo "======== Installation de WP-CLI ========"
+# Installation et déplacement au bon endroit
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
+# Fichier de configuration
+ln -s ~/config/home/.wp-cli/config.yml ~/.wp-cli/config.yml
 
 echo "======== Installation des quelques outils ========"
 echo "Micro (éditeur de documents)"
@@ -58,25 +92,8 @@ ln -sf ~/config/home/.zshrc ~/.zshrc
 # Configuration de zsh comme défaut pour l'utilisateur 
 sudo -i -u nicolas chsh -s $(which zsh)
 
-echo "======== Création des dossiers nécessaires ========"
-mkdir -p /etc/caddy
-chown -R root:www-data /etc/caddy
-mkdir -p /etc/ssl/caddy
-chown -R root:www-data /etc/ssl/caddy
-chmod 0770 /etc/ssl/caddy
-mkdir -p /var/log/caddy
-mkdir -p /var/www/voiretmanger.fr
-mkdir -p /var/www/files.voiretmanger.fr
-chown -R www-data:www-data /var/www
-chmod -R 555 /var/www
 
 
-echo "======== Installation des fichiers de configuration ========"
-ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
-ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
-
-echo "======== Création du service pour Caddy ========"
-systemctl enable ~/config/etc/systemd/system/caddy.service
 
 # Nettoyages et correction permissions
 apt-get -y autoremove
