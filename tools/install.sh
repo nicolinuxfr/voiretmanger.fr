@@ -36,7 +36,6 @@ systemctl restart php7.2-fpm
 # Fichier de configuration
 # ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
 
-
 echo "======== Installation de MariaDB 10.2 ========"
 apt-get -y install software-properties-common
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
@@ -69,7 +68,7 @@ ln -s ~/config/home/.wp-cli/config.yml ~/.wp-cli/config.yml
 
 echo "======== Installation des quelques outils ========"
 echo "Micro (éditeur de documents)"
-cd /usr/local/bin; curl https://getmic.ro | sudo bash
+cd /usr/local/bin; curl https://getmic.ro | bash
 
 echo "htop (monitoring)"
 apt-get install htop
@@ -91,9 +90,6 @@ ln -sf ~/config/home/.zshrc ~/.zshrc
 
 # Configuration de zsh comme défaut pour l'utilisateur 
 sudo -i -u nicolas chsh -s $(which zsh)
-
-
-
 
 # Nettoyages et correction permissions
 apt-get -y autoremove
