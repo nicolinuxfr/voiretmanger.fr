@@ -21,8 +21,6 @@ chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
 mkdir -p /var/www/voiretmanger.fr
 mkdir -p /var/www/files.voiretmanger.fr
-chown -R www-data:www-data /var/www
-chmod -R 555 /var/www
 
 echo "======== Installation de PHP 7.2 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
@@ -52,7 +50,9 @@ chmod 755 /usr/local/bin/caddy
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
 # Fichier de configuration
-ln -s ~/config/etc/caddy/Caddyfile /etc/caddy/Caddyfile
+cp ~/config/etc/caddy/Caddyfile /etc/caddy/
+chown www-data:www-data /etc/caddy/Caddyfile
+chmod 444 /etc/caddy/Caddyfile
 
 # Création du service
 systemctl enable ~/config/etc/systemd/system/caddy.service
@@ -92,7 +92,7 @@ ln -sf ~/config/home/.zshrc ~/.zshrc
 sudo -i -u root chsh -s $(which zsh)
 
 # Installation des crons automatiques
-cp ~/etc/cron.d/perso /etc/cron.d/
+cp ~/config/etc/cron.d/perso /etc/cron.d/
 chmod 644 /etc/cron.d/perso
 
 # Nettoyages et correction permissions
