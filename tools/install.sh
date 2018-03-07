@@ -89,7 +89,7 @@ ln -s ~/config/home/.alias ~/.alias
 ln -sf ~/config/home/.zshrc ~/.zshrc
 
 # Configuration de zsh comme défaut pour l'utilisateur 
-sudo -i -u nicolas chsh -s $(which zsh)
+sudo -i -u root chsh -s $(which zsh)
 
 # Installation des crons automatiques
 cp ~/etc/cron.d/perso /etc/cron.d/
@@ -97,7 +97,7 @@ chmod 644 /etc/cron.d/perso
 
 # Nettoyages et correction permissions
 apt-get -y autoremove
-chown -R nicolas:nicolas /home/nicolas/.*
+#chown -R nicolas:nicolas /home/nicolas/.*
 
 # Préparation de la suite
 IP=`curl -sS ipecho.net/plain`
