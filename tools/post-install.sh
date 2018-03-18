@@ -9,5 +9,6 @@ chown -R root:www-data /etc/ssl/caddy
 chmod -R 0770 /etc/ssl/caddy
 
 echo "Démarrage de Caddy"
+systemctl daemon-reload
 service caddy start
 service caddy status
