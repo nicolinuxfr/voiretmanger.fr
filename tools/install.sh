@@ -19,6 +19,9 @@ mkdir -p /etc/ssl/caddy
 chown -R root:www-data /etc/ssl/caddy
 chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
+mkdir /var/www
+chown www-data:www-data /var/www
+chmod 555 /var/www
 mkdir -p /var/www/voiretmanger.fr
 mkdir -p /var/www/files.voiretmanger.fr
 
@@ -98,7 +101,7 @@ ln -s ~/config/home/.alias ~/.alias
 ln -sf ~/config/home/.zshrc ~/.zshrc
 
 # Configuration de zsh comme défaut pour l'utilisateur 
-sudo -i -u root chsh -s $(which zsh)
+sudo -i -u nicolas chsh -s $(which zsh)
 
 # Installation des crons automatiques
 cp ~/config/etc/cron.d/perso /etc/cron.d/
@@ -106,7 +109,7 @@ chmod 644 /etc/cron.d/perso
 
 # Nettoyages et correction permissions
 apt-get -y autoremove
-#chown -R nicolas:nicolas /home/nicolas/.*
+chown -R nicolas:nicolas /home/nicolas/.*
 
 # Préparation de la suite
 IP=`curl -sS ipecho.net/plain`
