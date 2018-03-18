@@ -42,10 +42,11 @@ apt-get update
 apt-get -y install launchpad-getkeys
 apt-get -y install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc
 launchpad-getkeys
-systemctl restart php7.2-fpm
 
 # Fichier de configuration
-# ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
+ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
+
+systemctl restart php7.2-fpm
 
 echo "======== Installation de MariaDB 10.2 ========"
 apt-get -y install software-properties-common
