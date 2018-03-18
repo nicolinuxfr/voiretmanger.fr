@@ -12,3 +12,4 @@ alias caddymaj="curl https://getcaddy.com | bash -s personal && caddysetcap && c
 alias tail="sudo tail -f"
 alias caddyreload="sudo service caddy reload"
 alias majConf='~/config/tools/majConf.sh'
+alias mysql='mysql -u root -p'
