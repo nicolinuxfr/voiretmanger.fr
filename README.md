@@ -71,3 +71,18 @@ Par sécurité, il est conseillé de désactiver la possibilité d'utiliser root
 Seul l'utilisateur créé précédemment aura alors accès au serveur en SSH. Pensez à vérifier que c'est bien le cas en ouvrant une nouvelle session, avant de fermer la session en cours. 
 
 Après cela, importer les données MySQL et lancer Caddy. Pour le HTTPS, le nom de domaine doit déjà pointer sur le serveur.
+
+#### Importer la base de données
+
+Voici les étapes que je suis pour la base de données : 
+
+- Connexion à mysql : `mysql -u root -p` ;
+- Création base de données : `CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;` ;
+- Permissions (saisir le mot de passe à la place des astérisques) : `GRANT ALL ON wordpress.* TO 'voiretmanger'@'localhost' IDENTIFIED BY '****';` ;
+- Import de la base : 
+    - `use wordpress;` ;
+    - `source /chemin/db.sql`
+- Fin :
+    - `FLUSH PRIVILEGES;` ;
+    - `EXIT;`
+
