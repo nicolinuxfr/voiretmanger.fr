@@ -22,6 +22,15 @@ mkdir -p /var/log/caddy
 mkdir -p /var/www/voiretmanger.fr
 mkdir -p /var/www/files.voiretmanger.fr
 
+# Création du bon utilisateur avec les bons paramètres (cf https://github.com/mholt/caddy/tree/master/dist/init/linux-systemd)
+deluser www-data
+groupadd -g 33 www-data
+useradd \
+  -g www-data --no-user-group \
+  --home-dir /var/www --no-create-home \
+  --shell /usr/sbin/nologin \
+  --system --uid 33 www-data
+
 echo "======== Installation de PHP 7.2 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
 add-apt-repository -y ppa:ondrej/php
