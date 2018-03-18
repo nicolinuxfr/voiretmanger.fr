@@ -8,6 +8,6 @@ alias files="find . -type f | wc -l"
 alias majwpcli="sudo wp cli update"
 alias logs="tail -f /var/log/caddy/voiretmanger.access.log | grep 'HTTP/2.0'"
 alias caddyreload="sudo service caddy reload"
-alias majConf='~/config/tools/majConf.sh'
+alias majConf='sudo ~/config/tools/majConf.sh'
 alias db='~/config/tools/db.sh'
 alias mysql='mysql -u root -p'
