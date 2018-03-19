@@ -12,7 +12,7 @@ wp post delete $(wp post list --post_type='revision' --format=ids)
 wp db optimize
 
 # Sauvegarde
-wp db export /home/backup/$DATE.sql
+wp db export ~/backup/$DATE.sql
 
 # Nettoyage des anciennes sauvegardes (5 derniers jours)
-find /home/backup/ -maxdepth 1 -type f -mmin +7200 | xargs rm -rf
+find ~/backup/ -maxdepth 1 -type f -mmin +7200 | xargs rm -rf
