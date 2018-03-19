@@ -79,7 +79,7 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
-ln -s ~/config/home/.wp-cli/config.yml ~/.wp-cli/config.yml
+ln -s ~/config/home/.wp-cli ~/
 
 echo "======== Installation des quelques outils ========"
 echo "Micro (éditeur de documents)"
