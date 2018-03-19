@@ -1,4 +1,4 @@
-www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicoflo.fr {
+www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicoflo.fr, nicolinux.fr, wwww.nicolinux.fr {
     redir https://voiretmanger.fr{uri}/
 }
 
