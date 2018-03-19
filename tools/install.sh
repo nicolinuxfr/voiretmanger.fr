@@ -5,7 +5,7 @@
 
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "fr_FR.UTF-8"
-
+timedatectl set-timezone Europe/Paris
 
 echo "======== Mise à jour initiale ========"
 apt-get update
