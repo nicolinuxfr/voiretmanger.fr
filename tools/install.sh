@@ -13,6 +13,7 @@ apt-get -y upgrade
 apt-get -y dist-upgrade
 
 echo "======== Création des dossiers nécessaires ========"
+mkdir ~/backup
 mkdir -p /etc/caddy
 chown -R root:www-data /etc/caddy
 mkdir -p /etc/ssl/caddy
