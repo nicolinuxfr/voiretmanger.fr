@@ -14,7 +14,7 @@ alias db="sudo ~/config/tools/db.sh"
 # LOGS
 alias logs="tail -f /var/log/caddy/voiretmanger.access.log"
 alias logsFile="tail -f /var/log/caddy/files.access.log"
-alias logsErrors="tail -f /var/log/caddy/voiremanger.error.log"
+alias logsErrors="tail -f /var/log/caddy/voiretmanger.error.log"
 alias syslog="tail -f /var/log/syslog"
 
 # CADDY
