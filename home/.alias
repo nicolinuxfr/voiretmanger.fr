@@ -9,7 +9,7 @@ alias maj="apt-get update"
 alias Maj="apt-get upgrade"
 alias files="find . -type f | wc -l"
 alias majConf="sudo ~/config/tools/majConf.sh"
-alias db="sudo ~/config/tools/db.sh"
+alias db="~/config/tools/db.sh"
 
 # LOGS
 alias logs="tail -f /var/log/caddy/voiretmanger.access.log"
