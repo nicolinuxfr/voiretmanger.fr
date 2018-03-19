@@ -1,13 +1,26 @@
-alias caddysetcap="sudo setcap cap_net_bind_service=+ep $(which caddy)"
-alias caddystatus="sudo service caddy status"
-alias caddystart="sudo service caddy start"
-alias caddystop="sudo service caddy stop"
-alias maj="sudo apt-get update"
-alias Maj="sudo apt-get upgrade"
+# PERMISSIONS
+alias service="sudo service"
+alias tail="sudo tail"
+alias apt-get="sudo apt-get"
+alias mysql="mysql -u root -p"
+
+# GESTION SERVEUR
+alias maj="apt-get update"
+alias Maj="apt-get upgrade"
 alias files="find . -type f | wc -l"
-alias majwpcli="sudo wp cli update"
-alias logs="tail -f /var/log/caddy/voiretmanger.access.log | grep 'HTTP/2.0'"
-alias caddyreload="sudo service caddy reload"
-alias majConf='sudo ~/config/tools/majConf.sh'
-alias db='~/config/tools/db.sh'
-alias mysql='mysql -u root -p'
+alias majConf="sudo ~/config/tools/majConf.sh"
+alias db="sudo ~/config/tools/db.sh"
+
+# LOGS
+alias logs="tail -f /var/log/caddy/voiretmanger.access.log"
+alias logsFile="tail -f /var/log/caddy/files.access.log"
+alias logsErrors="tail -f /var/log/caddy/voiremanger.error.log"
+alias syslog="tail -f /var/log/syslog"
+
+# CADDY
+alias caddysetcap="sudo setcap cap_net_bind_service=+ep $(which caddy)"
+alias caddystatus="service caddy status"
+alias caddystart="service caddy start"
+alias caddystop="service caddy stop"
+alias caddyreload="service caddy reload"
+alias caddyfile="sudo micro /etc/caddy/Caddyfile"
