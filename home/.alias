@@ -7,6 +7,7 @@ alias mysql="mysql -u root -p"
 # GESTION SERVEUR
 alias maj="apt-get update"
 alias Maj="apt-get upgrade"
+alias Maj2="sudo ~/config/tools/update.sh"
 alias files="find . -type f | wc -l"
 alias majConf="sudo ~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
