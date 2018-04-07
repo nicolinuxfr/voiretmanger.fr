@@ -1,1 +1,1 @@
-#0 0 * * * nicolas ~/config/tools/db.sh > /var/log/cron.log 2>&1
+0 0 * * * nicolas ~/config/tools/db.sh > /var/log/cron.log 2>&1
