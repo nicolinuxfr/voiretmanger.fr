@@ -5,7 +5,7 @@
 # Caddy
 curl https://getcaddy.com | bash -s personal
 setcap cap_net_bind_service=+ep $(which caddy)
-service caddy reload
+service caddy restart
 
 # Micro
 cd /usr/local/bin; curl https://getmic.ro | bash 
