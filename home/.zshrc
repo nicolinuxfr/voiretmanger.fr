@@ -87,3 +87,6 @@ source $HOME/.alias
 
 export iterm2_hostname=voiretmanger.fr
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Télémétrie dans Caddy
+export CADDY_TELEMETRY=on
