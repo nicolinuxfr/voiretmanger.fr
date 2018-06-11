@@ -48,7 +48,7 @@ voiretmanger.fr {
 	}
 }
 
-www.files.voiretmanger.fr {
+http://files.voiretmanger.fr {
     redir https://files.voiretmanger.fr{uri}
 }
 
@@ -60,4 +60,11 @@ files.voiretmanger.fr {
      gzip
 
      browse
+}
+
+static.voiretmanger.fr {
+    root /var/www/static.voiretmanger.fr
+    log /var/log/caddy/static.access.log
+    errors /var/log/caddy/static.error.log
+    gzip
 }
