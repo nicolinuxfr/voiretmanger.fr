@@ -41,7 +41,7 @@ add-apt-repository -y ppa:nilarimogard/webupd8
 add-apt-repository -y ppa:ondrej/php
 apt-get update
 apt-get -y install launchpad-getkeys
-apt-get -y install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc
+apt-get -y install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc php7.2-zip
 launchpad-getkeys
 
 # Fichier de configuration
