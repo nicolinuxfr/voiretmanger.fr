@@ -20,7 +20,7 @@ mkdir -p /etc/ssl/caddy
 chown -R root:www-data /etc/ssl/caddy
 chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
-chown -R www-dataCor:www-data /var/log/caddy
+chown -R www-data:www-data /var/log/caddy
 mkdir /var/www
 chown www-data:www-data /var/www
 chmod 555 /var/www
