@@ -11,3 +11,5 @@ chmod 444 /etc/caddy/Caddyfile
 
 cp -rf etc/cron.d/perso /etc/cron.d/
 chmod 644 /etc/cron.d/perso
+
+source ~/.zshrc
