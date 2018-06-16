@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 # Script qui permet de mettre à jour la configuration depuis le dépôt et d'installer les fichiers au bon endroit.
 
@@ -11,5 +11,3 @@ chmod 444 /etc/caddy/Caddyfile
 
 cp -rf etc/cron.d/perso /etc/cron.d/
 chmod 644 /etc/cron.d/perso
-
-source ~/.zshrc
