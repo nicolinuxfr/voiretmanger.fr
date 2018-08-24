@@ -1,4 +1,4 @@
-www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicoflo.fr, nicolinux.fr, www.nicolinux.fr, blog.nicolinux.fr, furno.fr, www.furno.fr {
+www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicoflo.fr, nicolinux.fr, www.nicolinux.fr, blog.nicolinux.fr, furno.fr, www.furno.fr, bordellier.furno.fr {
     redir https://voiretmanger.fr{uri}/
 }
 
@@ -60,11 +60,4 @@ files.voiretmanger.fr {
      gzip
 
      browse
-}
-
-static.voiretmanger.fr {
-    root /var/www/static.voiretmanger.fr
-    log /var/log/caddy/static.access.log
-    errors /var/log/caddy/static.error.log
-    gzip
 }
