@@ -17,6 +17,7 @@ alias logs="tail -f /var/log/caddy/voiretmanger.access.log"
 alias logsFile="tail -f /var/log/caddy/files.access.log"
 alias logsErrors="tail -f /var/log/caddy/voiretmanger.error.log"
 alias syslog="tail -f /var/log/syslog"
+alias caddylog="syslog | grep 'caddy'"
 
 # CADDY
 alias caddysetcap="sudo setcap cap_net_bind_service=+ep $(which caddy)"
