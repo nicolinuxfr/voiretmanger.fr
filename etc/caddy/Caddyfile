@@ -5,12 +5,7 @@ www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicoflo.fr, www.nicof
 
 voiretmanger.fr {
     root /var/www/voiretmanger.fr
-    log /var/log/caddy/voiretmanger.access.log {
-	rotate_size 50  # Rotate after 50 MB
-	rotate_age  90  # Keep rotated files for 90 days
-	rotate_keep 20  # Keep at most 20 log files
-	rotate_compress
-    }
+    log /var/log/caddy/voiretmanger.access.log 
 
     errors /var/log/caddy/voiretmanger.error.log
 
