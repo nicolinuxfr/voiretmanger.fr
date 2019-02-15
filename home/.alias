@@ -12,6 +12,10 @@ alias files="find . -type f | wc -l"
 alias majConf="sudo ~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
 
+# Fichiers
+alias duf='du -sh *'
+alias df='df -h'
+
 # LOGS
 alias logs="tail -f /var/log/caddy/voiretmanger.access.log"
 alias logsFile="tail -f /var/log/caddy/files.access.log"
