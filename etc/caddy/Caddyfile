@@ -43,9 +43,6 @@ voiretmanger.fr {
 	}
 }
 
-http://files.voiretmanger.fr {
-    redir https://files.voiretmanger.fr{uri}
-}
 
 files.voiretmanger.fr {
     root /var/www/files.voiretmanger.fr
