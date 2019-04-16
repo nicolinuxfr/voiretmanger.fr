@@ -58,7 +58,7 @@ files.voiretmanger.fr {
 }
 
 
-uploads.voiretmanger.fr{
+uploads.voiretmanger.fr {
     upload / {
  	    to "/var/www/files.voiretmanger.fr/uploads"
     }
