@@ -3,7 +3,7 @@
 # Script de mise à jour
 
 # Caddy
-curl https://getcaddy.com | bash -s personal http.upload
+curl https://getcaddy.com | bash -s personal
 setcap cap_net_bind_service=+ep $(which caddy)
 service caddy restart
 
