@@ -62,6 +62,6 @@ uploads.voiretmanger.fr {
     upload / {
  	    to "/var/www/files.voiretmanger.fr/uploads"
     }
-
-
+    log /var/log/caddy/uploads.access.log
+    errors /var/log/caddy/uploads.error.log
 }
