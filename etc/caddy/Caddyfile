@@ -53,3 +53,18 @@ files.voiretmanger.fr {
 
      browse
 }
+
+uploads.voiretmanger.fr {
+    upload / {
+ 	    to "/var/www/files.voiretmanger.fr/uploads"
+    }
+    log /var/log/caddy/uploads.access.log
+    errors /var/log/caddy/uploads.error.log
+}
+
+memoire.nicolasfurno.fr {
+    root /var/www/memoire.nicolasfurno.fr
+    log /var/log/caddy/memoire.access.log
+    errors /var/log/caddy/memoire.error.log
+    gzip
+}
