@@ -12,7 +12,7 @@ voiretmanger.fr {
     gzip
 
     # PHP-FPM with Unix socket
-    fastcgi / /var/run/php/php7.2-fpm.sock php
+    fastcgi / /var/run/php/php7.3-fpm.sock php
 
     # Redirect personnels
 	redir /a-propos/publicite /soutien

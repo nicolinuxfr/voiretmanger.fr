@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-# Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 16.06.
+# Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 18.04 LTS.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
-locale-gen "fr_FR.UTF-8"
+locale-gen "en_US.UTF-8"
 timedatectl set-timezone Europe/Paris
 
 echo "======== Mise à jour initiale ========"
@@ -36,23 +36,25 @@ useradd \
   --shell /usr/sbin/nologin \
   --system --uid 33 www-data
 
-echo "======== Installation de PHP 7.2 ========"
+echo "======== Installation de PHP 7.3 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
 add-apt-repository -y ppa:ondrej/php
 apt-get update
 apt-get -y install launchpad-getkeys
-apt-get -y install php7.2-fpm php7.2-mysql php7.2-curl php7.2-gd php7.2-mbstring php7.2-xml php7.2-xmlrpc php7.2-zip
+apt-get -y install php7.3-fpm php7.3-mysql php7.3-curl php7.3-gd php7.3-mbstring php7.3-xml php7.3-xmlrpc php7.3-zip
 launchpad-getkeys
 
 # Fichier de configuration
-ln -sf ~/config/etc/php/7.2/fpm/php.ini /etc/php/7.2/fpm/php.ini
+ln -sf ~/config/etc/php/7.3/fpm/php.ini /etc/php/7.3/fpm/php.ini
 
-systemctl restart php7.2-fpm
+ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.3/fpm/conf.d
 
-echo "======== Installation de MariaDB 10.2 ========"
+systemctl restart php7.3-fpm
+
+echo "======== Installation de MariaDB 10.3 ========"
 apt-get -y install software-properties-common
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-add-apt-repository -y 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.2/ubuntu xenial main'
+add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.3/ubuntu bionic main'
 apt-get update
 apt-get -y install mariadb-server
 
@@ -104,15 +106,22 @@ ln -s ~/config/home/.alias ~/.alias
 ln -sf ~/config/home/.zshrc ~/.zshrc
 
 # Configuration de zsh comme défaut pour l'utilisateur 
-sudo -i -u nicolas chsh -s $(which zsh)
+chsh -s $(which zsh)
 
 # Installation des crons automatiques
-cp ~/config/etc/cron.d/perso /etc/cron.d/
-chmod 644 /etc/cron.d/perso
 
-# Nettoyages et correction permissions
+## Création des fichiers de log
+touch /var/log/mysql/backup.log
+
+### Création du cron
+tee -a /etc/cron.d/refurb <<EOF
+0 0 * * * root ~/config/tools/db.sh > /var/log/mysql/backup.log 2>&1
+EOF
+fi
+
+
+# Nettoyages
 apt-get -y autoremove
-chown -R nicolas:nicolas /home/nicolas/.*
 
 # Préparation de la suite
 IP=`curl -sS ipecho.net/plain`
