@@ -117,7 +117,6 @@ touch /var/log/mysql/backup.log
 tee -a /etc/cron.d/refurb <<EOF
 0 0 * * * root ~/config/tools/db.sh > /var/log/mysql/backup.log 2>&1
 EOF
-fi
 
 
 # Nettoyages
