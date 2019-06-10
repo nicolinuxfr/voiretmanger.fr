@@ -19,6 +19,14 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 EOF
 
+sudo tee -a ~/.my.cnf <<EOF
+[client]
+user=root
+password="$passwdroot"
+host=127.0.0.1
+EOF
+chmod 0600 ~/.my.cnf
+
 echo "Saisir le mot de passe de la db : "
 read passwddb
 
