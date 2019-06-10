@@ -30,3 +30,10 @@ alias caddystart="service caddy start"
 alias caddystop="service caddy stop"
 alias caddyreload="service caddy reload"
 alias caddyfile="sudo micro /etc/caddy/Caddyfile"
+
+# Services
+alias status="systemctl status"
+alias restart="systemctl restart"
+alias reload="systemctl reload"
+alias start="systemctl start"
+alias stop="systemctl stop"
