@@ -41,7 +41,7 @@ add-apt-repository -y ppa:nilarimogard/webupd8
 add-apt-repository -y ppa:ondrej/php
 apt-get update
 apt-get -y install launchpad-getkeys
-apt-get -y install php7.3-fpm php7.3-mysql php7.3-curl php7.3-gd php7.3-mbstring php7.3-xml php7.3-xmlrpc php7.3-zip
+apt-get -y install php7.3-fpm php7.3-mysql php7.3-curl php7.3-gd php7.3-mbstring php7.3-xml php7.3-xmlrpc php7.3-zip php7.3-bcmath php-imagick
 launchpad-getkeys
 
 # Fichier de configuration
