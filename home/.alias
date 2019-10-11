@@ -3,6 +3,7 @@ alias service="sudo service"
 alias tail="sudo tail"
 alias apt-get="sudo apt-get"
 alias wp="wp --allow-root"
+alias mysql="mysql -u root -p"
 
 # GESTION SERVEUR
 alias maj="apt-get update"
