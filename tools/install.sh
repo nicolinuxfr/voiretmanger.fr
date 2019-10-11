@@ -47,6 +47,7 @@ launchpad-getkeys
 
 # Fichier de configuration
 ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
+ln -sf ~/config/etc/php/pool.d/*.conf /etc/php/7.4/fpm/pool.d
 
 systemctl restart php7.4-fpm
 
