@@ -52,6 +52,8 @@ systemctl restart php7.4-fpm
 
 echo "======== Installation de MariaDB ========"
 curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
+apt-get update
+apt-get -y install mariadb-server
 
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
