@@ -11,6 +11,7 @@ echo "======== Mise à jour initiale ========"
 apt-get update
 apt-get -y upgrade
 apt-get -y dist-upgrade
+apt-get -y install libcap2-bin
 
 echo "======== Création des dossiers nécessaires ========"
 mkdir ~/backup
@@ -41,7 +42,7 @@ add-apt-repository -y ppa:nilarimogard/webupd8
 add-apt-repository -y ppa:ondrej/php
 apt-get update
 apt-get -y install launchpad-getkeys
-apt-get -y install php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-mbstring php7.4-xml php7.4-xmlrpc php7.4-zip php7.4-bcmath php-imagick
+apt-get -y install php7.4 php7.4-cli php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-mbstring php7.4-xml php7.4-json php7.4-xmlrpc php7.4-zip php7.4-bcmath
 launchpad-getkeys
 
 # Fichier de configuration
@@ -50,7 +51,7 @@ ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
 systemctl restart php7.4-fpm
 
 echo "======== Installation de MariaDB ========"
-curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
 
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
@@ -85,8 +86,8 @@ echo "htop (monitoring)"
 apt-get install htop
 
 echo "goaccess (analyse de logs)"
-echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
-wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key add -
+echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" | tee -a /etc/apt/sources.list.d/goaccess.list
+wget -O - https://deb.goaccess.io/gnugpg.key | apt-key add -
 apt-get update
 apt-get -y install goaccess
 
