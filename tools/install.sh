@@ -81,18 +81,6 @@ mv wp-cli.phar /usr/local/bin/wp
 ln -s ~/config/home/.wp-cli ~/
 
 echo "======== Installation des quelques outils ========"
-echo "Micro (éditeur de documents)"
-cd /usr/local/bin; curl https://getmic.ro | bash
-
-echo "htop (monitoring)"
-apt-get install htop
-
-echo "goaccess (analyse de logs)"
-echo "deb http://deb.goaccess.io/ $(lsb_release -cs) main" | tee -a /etc/apt/sources.list.d/goaccess.list
-wget -O - https://deb.goaccess.io/gnugpg.key | apt-key add -
-apt-get update
-apt-get -y install goaccess
-
 echo "zsh et oh-my-zsh (Shell 2.0)"
 apt-get -y install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
