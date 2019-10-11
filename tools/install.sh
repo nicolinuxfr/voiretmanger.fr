@@ -127,5 +127,4 @@ echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=
 
 echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /etc/ssl/caddy/* root@$IP:/etc/ssl/caddy\n"
 
-
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/dump.sql root@$IP:~/dump.sql\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup root@$IP:~/backup\n"
