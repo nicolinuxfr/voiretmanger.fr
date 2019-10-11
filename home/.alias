@@ -1,16 +1,13 @@
 # PERMISSIONS
-alias service="sudo service"
-alias tail="sudo tail"
-alias apt-get="sudo apt-get"
 alias wp="wp --allow-root"
 alias mysql="mysql -u root -p"
 
 # GESTION SERVEUR
 alias maj="apt-get update"
 alias Maj="apt-get upgrade"
-alias Maj2="sudo ~/config/tools/update.sh"
+alias Maj2="~/config/tools/update.sh"
 alias files="find . -type f | wc -l"
-alias majConf="sudo ~/config/tools/majConf.sh"
+alias majConf="~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
 
 # Fichiers
@@ -25,12 +22,11 @@ alias syslog="tail -f /var/log/syslog"
 alias caddylog="syslog | grep 'caddy'"
 
 # CADDY
-alias caddysetcap="sudo setcap cap_net_bind_service=+ep $(which caddy)"
+alias caddysetcap="setcap cap_net_bind_service=+ep $(which caddy)"
 alias caddystatus="service caddy status"
 alias caddystart="service caddy start"
 alias caddystop="service caddy stop"
 alias caddyreload="service caddy reload"
-alias caddyfile="sudo micro /etc/caddy/Caddyfile"
 
 # Services
 alias status="systemctl status"
