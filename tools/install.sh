@@ -49,12 +49,8 @@ ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
 
 systemctl restart php7.4-fpm
 
-echo "======== Installation de MariaDB 10.3 ========"
-apt-get -y install software-properties-common
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.3/ubuntu bionic main'
-apt-get update
-apt-get -y install mariadb-server
+echo "======== Installation de MariaDB ========"
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash
 
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
