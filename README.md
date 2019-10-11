@@ -6,11 +6,11 @@ Vous pouvez utiliser ce projet comme base pour le vôtre. **Ne l'utilisez pas di
 
 ## Que fait le script d'installation ?
 
-Le script installe ces outils sur une base d'Ubuntu 16.04 :
+Le script installe ces outils sur une base d'Ubuntu 18.04 :
 
 - Serveur web :
     - [Caddy](https://github.com/mholt/caddy) ;
-    - PHP 7.2 ;
+    - PHP 7.4 ;
     - MariaDB 10.2 ;
     - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :

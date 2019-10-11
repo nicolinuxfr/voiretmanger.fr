@@ -36,20 +36,18 @@ useradd \
   --shell /usr/sbin/nologin \
   --system --uid 33 www-data
 
-echo "======== Installation de PHP 7.3 ========"
+echo "======== Installation de PHP 7.4 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
 add-apt-repository -y ppa:ondrej/php
 apt-get update
 apt-get -y install launchpad-getkeys
-apt-get -y install php7.3-fpm php7.3-mysql php7.3-curl php7.3-gd php7.3-mbstring php7.3-xml php7.3-xmlrpc php7.3-zip php7.3-bcmath php-imagick
+apt-get -y install php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-mbstring php7.4-xml php7.4-xmlrpc php7.4-zip php7.4-bcmath php-imagick
 launchpad-getkeys
 
 # Fichier de configuration
-ln -sf ~/config/etc/php/7.3/fpm/php.ini /etc/php/7.3/fpm/php.ini
+ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
 
-ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.3/fpm/conf.d
-
-systemctl restart php7.3-fpm
+systemctl restart php7.4-fpm
 
 echo "======== Installation de MariaDB 10.3 ========"
 apt-get -y install software-properties-common
