@@ -119,8 +119,10 @@ apt-get -y autoremove
 # Préparation de la suite
 IP=`curl -sS ipecho.net/plain`
 
-echo "\n======== Script d'installation terminé ========\n"
-echo "Ouvrez une nouvelle session avec ce même compte pour bénéficier de tous les changements.\n "
+echo "\n======== Script d'installation terminé ========\n\n\n"
+
+echo "Ouvrez une nouvelle session avec ce même compte pour bénéficier de tous les changements.\n\n "
+
 echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant ces commandes depuis le précédent serveur : \n"
 
 echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/www/* root@$IP:/var/www\n"
@@ -128,3 +130,7 @@ echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=
 echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /etc/ssl/caddy/* root@$IP:/etc/ssl/caddy\n"
 
 echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup root@$IP:~/backup\n"
+
+echo "wp --allow-root db export - > ~/dump.sql\n"
+
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/dump.sql root@$IP:~/\n"
