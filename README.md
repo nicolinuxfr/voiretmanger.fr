@@ -30,16 +30,7 @@ Il crée enfin les dossiers nécessaires pour héberger les sites et les logs :
 
 ### Configuration initiale du serveur
 
-Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 16.04 et d'un compte non root. Pour la configuration initiale de l'utilisateur, vous pouvez [suivre ce tutoriel](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
-
-Voici les commandes que je saisis sur mes VPS : 
-
-- Connexion en root : `ssh root@IP.IP.IP.IP` ;
-- Ajout utilisateur : `adduser nicolas` ;
-- Droit root : `usermod -aG sudo nicolas` ;
-- Envoi du mot de passe utilisateur depuis l'ordinateur local : `ssh-copy-id nicolas@IP.IP.IP.IP` ;
-- Connexion avec l'utilisateur : `ssh nicolas@IP.IP.IP.IP` ;
-- Vérifications : fermer la session et la rouvrir pour voir si tout est correct.
+Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 18.04 et d'un compte root. 
 
 
 ### Récupérer le dépôt
@@ -61,14 +52,6 @@ Ne relancez pas le script une deuxième fois sur un serveur !
 ### Après le script
 
 Le script indique à la fin la commande à exécuter depuis un ordinateur local, ou bien sur le serveur précédent, pour initier le transfert des données. Par simplicité, le transfert est effectué en root.
-
-Par sécurité, il est conseillé de désactiver la possibilité d'utiliser root ensuite : 
-
-- Édition configuration : `sudo nano /etc/ssh/sshd_config` ; 
-- Modification de la ligne `PermitRootLogin yes` > `PermitRootLogin no` ;
-- Redémarrage serveur SSH : `sudo systemctl reload sshd`.
-
-Seul l'utilisateur créé précédemment aura alors accès au serveur en SSH. Pensez à vérifier que c'est bien le cas en ouvrant une nouvelle session, avant de fermer la session en cours. 
 
 Après cela, importer les données MySQL et lancer Caddy. Pour le HTTPS, le nom de domaine doit déjà pointer sur le serveur.
 
