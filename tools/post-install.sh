@@ -50,3 +50,6 @@ chmod -R 0770 /etc/ssl/caddy
 echo "Démarrage de Caddy"
 systemctl daemon-reload
 service caddy start
+
+echo "Installation de modules wp-cli"
+wp package install trepmal/wp-revisions-cli
