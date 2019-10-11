@@ -10,7 +10,7 @@ read passwdroot
 
 # Équivalent automatisé de la commande `mysql_secure_installation`. Source : http://bertvv.github.io/notes-to-self/2015/11/16/automating-mysql_secure_installation/
 
-mysql --user=root <<EOF
+mysql --protocol=socket --user=root <<EOF
 UPDATE mysql.user SET Password=PASSWORD('$passwdroot') WHERE User='root';
 DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
@@ -19,7 +19,7 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 FLUSH PRIVILEGES;
 EOF
 
-sudo tee -a ~/.my.cnf <<EOF
+tee -a ~/.my.cnf <<EOF
 [client]
 user=root
 password="$passwdroot"
