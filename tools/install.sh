@@ -56,6 +56,9 @@ curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
 apt-get update
 apt-get -y install mariadb-server
 
+# Fichier de configuration
+ln -sf ~/config/etc/mysql/conf.d/*.cnf /etc/mysql/conf.d
+
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
 chown root:root /usr/local/bin/caddy
