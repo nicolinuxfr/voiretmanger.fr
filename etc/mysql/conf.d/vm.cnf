@@ -1,7 +1,2 @@
 [mysqld]
 skip-log-bin
-sql_log_bin=0
-log-bin=0
-log_bin_index=0
-expire_logs_days=0
-max_binlog_size=0
