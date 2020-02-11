@@ -59,6 +59,8 @@ apt-get -y install mariadb-server
 # Fichier de configuration
 ln -sf ~/config/etc/mysql/conf.d/*.cnf /etc/mysql/conf.d
 
+systemctl restart mysql
+
 echo "======== Installation de Caddy ========"
 curl https://getcaddy.com | bash -s personal
 chown root:root /usr/local/bin/caddy
