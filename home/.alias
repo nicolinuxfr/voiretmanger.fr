@@ -11,7 +11,7 @@ alias majConf="~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
 
 # Fichiers
-alias duf='du -sh *'
+alias duf='sudo du -sh *'
 alias df='df -h'
 
 # LOGS
