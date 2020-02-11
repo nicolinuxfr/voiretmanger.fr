@@ -1,4 +1,3 @@
 [mysqld]
-# Désactivation des fichiers bin
 skip-log-bin
 log_bin
