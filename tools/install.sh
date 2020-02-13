@@ -62,20 +62,34 @@ ln -sf ~/config/etc/mysql/conf.d/*.cnf /etc/mysql/conf.d
 systemctl restart mysql
 
 echo "======== Installation de Caddy ========"
-curl https://getcaddy.com | bash -s personal
+
+# Installation du binaire
+## Vérifier version ici : https://github.com/caddyserver/caddy/releases
+cd /tpm/
+curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.14/caddy2_beta14_linux_amd64
+mv caddy2_beta14_linux_amd64 /usr/local/bin/caddy
+
 chown root:root /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
+
+# Création du groupe caddy et de l'utilisateur caddy 
+groupadd --system caddy
+useradd --system \
+	--gid caddy \
+	--create-home \
+	--home-dir /var/lib/caddy \
+	--shell /usr/sbin/nologin \
+	--comment "Caddy web server" \
+	caddy
 
 # Correction autorisations pour utiliser les ports 80 et 443
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
-# Fichier de configuration
-cp ~/config/etc/caddy/Caddyfile /etc/caddy/
-chown www-data:www-data /etc/caddy/Caddyfile
-chmod 444 /etc/caddy/Caddyfile
-
-# Création du service
+# Création du service pour Caddy et démarrage
 systemctl enable ~/config/etc/systemd/system/caddy.service
+systemctl daemon-reload
+systemctl enable caddy
+systemctl start caddy
 
 echo "======== Installation de WP-CLI ========"
 # Installation et déplacement au bon endroit
