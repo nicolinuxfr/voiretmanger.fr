@@ -6,6 +6,6 @@ cd ~/config/
 git pull origin master
 
 cp -rf etc/caddy/Caddyfile /etc/caddy/
-chown www-data:www-data /etc/caddy/Caddyfile
+chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
