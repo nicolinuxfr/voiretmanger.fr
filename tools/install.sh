@@ -16,26 +16,18 @@ apt-get -y install libcap2-bin
 echo "======== Création des dossiers nécessaires ========"
 mkdir ~/backup
 mkdir -p /etc/caddy
-chown -R root:www-data /etc/caddy
+chown -R root:caddy /etc/caddy
 mkdir -p /etc/ssl/caddy
-chown -R root:www-data /etc/ssl/caddy
+chown -R root:caddy /etc/ssl/caddy
 chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
-chown -R www-data:www-data /var/log/caddy
+chown -R caddy:caddy /var/log/caddy
 mkdir /var/www
-chown www-data:www-data /var/www
+chown caddy:caddy /var/www
 chmod 555 /var/www
 mkdir -p /var/www/voiretmanger.fr
 mkdir -p /var/www/files.voiretmanger.fr
-
-# Création du bon utilisateur avec les bons paramètres (cf https://github.com/mholt/caddy/tree/master/dist/init/linux-systemd)
-deluser www-data
-groupadd -g 33 www-data
-useradd \
-  -g www-data --no-user-group \
-  --home-dir /var/www --no-create-home \
-  --shell /usr/sbin/nologin \
-  --system --uid 33 www-data
+mkdir -p /var/www/memoire.voiretmanger.fr
 
 echo "======== Installation de PHP 7.4 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
