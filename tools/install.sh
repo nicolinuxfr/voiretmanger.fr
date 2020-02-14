@@ -15,30 +15,26 @@ apt-get -y install libcap2-bin
 
 echo "======== Création des dossiers nécessaires ========"
 
-# Création du groupe caddy et de l'utilisateur caddy 
-groupadd --system caddy
-useradd --system \
-	--gid caddy \
-	--create-home \
-	--home-dir /var/lib/caddy \
-	--shell /usr/sbin/nologin \
-	--comment "Caddy web server" \
-	caddy
-
 mkdir ~/backup
 mkdir -p /etc/caddy
-chown -R root:caddy /etc/caddy
+chown -R root:www-data /etc/caddy
 mkdir -p /etc/ssl/caddy
-chown -R root:caddy /etc/ssl/caddy
+chown -R root:www-data /etc/ssl/caddy
 chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
-chown -R caddy:caddy /var/log/caddy
+chown -R www-data:www-data /var/log/caddy
 mkdir /var/www
-chown caddy:caddy /var/www
+chown www-data:www-data /var/www
 chmod 555 /var/www
-mkdir -p /var/www/voiretmanger.fr
-mkdir -p /var/www/files.voiretmanger.fr
-mkdir -p /var/www/memoire.voiretmanger.fr
+
+# Création du bon utilisateur avec les bons paramètres (cf https://github.com/mholt/caddy/tree/master/dist/init/linux-systemd)
+deluser www-data
+groupadd -g 33 www-data
+useradd \
+  -g www-data --no-user-group \
+  --home-dir /var/www --no-create-home \
+  --shell /usr/sbin/nologin \
+  --system --uid 33 www-data
 
 echo "======== Installation de PHP 7.4 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
@@ -72,7 +68,7 @@ cd /tpm/
 curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.14/caddy2_beta14_linux_amd64
 mv caddy2_beta14_linux_amd64 /usr/local/bin/caddy
 
-chown root:root /usr/local/bin/caddy
+chown www-data:www-data /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
 
 # Correction autorisations pour utiliser les ports 80 et 443
