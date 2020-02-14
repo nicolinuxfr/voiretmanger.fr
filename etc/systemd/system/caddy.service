@@ -6,6 +6,7 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
+Environment=CADDYPATH=/etc/ssl/caddy
 ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile --resume --environ
 ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
 TimeoutStopSec=5s
