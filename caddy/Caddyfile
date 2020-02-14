@@ -46,7 +46,7 @@ files.voiretmanger.fr {
 }
 
 memoire.nicolasfurno.fr {
-    root /var/www/memoire.nicolasfurno.fr
+    root * /var/www/memoire.nicolasfurno.fr
     encode zstd gzip
     file_server
 }

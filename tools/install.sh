@@ -14,6 +14,17 @@ apt-get -y dist-upgrade
 apt-get -y install libcap2-bin
 
 echo "======== Création des dossiers nécessaires ========"
+
+# Création du groupe caddy et de l'utilisateur caddy 
+groupadd --system caddy
+useradd --system \
+	--gid caddy \
+	--create-home \
+	--home-dir /var/lib/caddy \
+	--shell /usr/sbin/nologin \
+	--comment "Caddy web server" \
+	caddy
+
 mkdir ~/backup
 mkdir -p /etc/caddy
 chown -R root:caddy /etc/caddy
@@ -63,16 +74,6 @@ mv caddy2_beta14_linux_amd64 /usr/local/bin/caddy
 
 chown root:root /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
-
-# Création du groupe caddy et de l'utilisateur caddy 
-groupadd --system caddy
-useradd --system \
-	--gid caddy \
-	--create-home \
-	--home-dir /var/lib/caddy \
-	--shell /usr/sbin/nologin \
-	--comment "Caddy web server" \
-	caddy
 
 # Correction autorisations pour utiliser les ports 80 et 443
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
