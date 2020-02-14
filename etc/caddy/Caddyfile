@@ -14,7 +14,7 @@ www.nicolinux.fr {
 voiretmanger.fr {
     root * /var/www/voiretmanger.fr
     encode zstd gzip
-    php_fastcgi 127.0.0.1:9000
+    php_fastcgi unix//run/php/php7.4-fpm.sock
 
     file_server /wp-content/uploads/*
     file_server /wp-content/cache/*
