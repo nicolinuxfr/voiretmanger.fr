@@ -35,8 +35,8 @@ echo "Réparation des permissions"
 chown -R caddy:caddy /var/www
 chmod -R 555 /var/www
 chmod -R 755 /var/www/voiretmanger.fr
-chown -R root:www-data /var/lib/caddy
-chmod -R 0770 /var/lib/caddy/.local/share/caddy
+chown -R caddy:caddy /var/lib/caddy
+chmod -R 770 /var/lib/caddy/.local/share/caddy
 
 echo "Démarrage de Caddy"
 systemctl daemon-reload
