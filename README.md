@@ -9,15 +9,12 @@ Vous pouvez utiliser ce projet comme base pour le vôtre. **Ne l'utilisez pas di
 Le script installe ces outils sur une base d'Ubuntu 18.04 :
 
 - Serveur web :
-    - [Caddy](https://github.com/mholt/caddy) ;
+    - [Caddy 2](https://github.com/mholt/caddy) ;
     - PHP 7.4 ;
     - MariaDB 10.4 ;
     - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :
-    - ZSH et [oh-my-zsh](http://ohmyz.sh) ;
-    - [htop](http://hisham.hm/htop/) ;
-    - [micro](https://micro-editor.github.io) ;
-    - [goaccess](https://goaccess.io).
+    - ZSH et [oh-my-zsh](http://ohmyz.sh).
 
 Il installe aussi les fichiers de configuration stockés dans le sous-dossier `/etc/`, grâce à des liens symboliques qui simplifient ensuite les mises à jour.
 
@@ -55,17 +52,7 @@ Le script indique à la fin la commande à exécuter depuis un ordinateur local,
 
 Après cela, importer les données MySQL et lancer Caddy. Pour le HTTPS, le nom de domaine doit déjà pointer sur le serveur.
 
-#### Importer la base de données
+Le script `post-install.sh` se charge d'importer les données : 
 
-Voici les étapes que je suis pour la base de données : 
-
-- Connexion à mysql : `mysql -u root -p` ;
-- Création base de données : `CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;` ;
-- Permissions (saisir le mot de passe à la place des astérisques) : `GRANT ALL ON wordpress.* TO 'voiretmanger'@'localhost' IDENTIFIED BY '****';` ;
-- Import de la base : 
-    - `use wordpress;` ;
-    - `source /chemin/db.sql`
-- Fin :
-    - `FLUSH PRIVILEGES;` ;
-    - `EXIT;`
+    ~/config/tools/post-install.sh
 
