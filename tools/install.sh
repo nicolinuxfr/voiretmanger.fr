@@ -3,6 +3,9 @@
 # Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 18.04 LTS.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
+# Pour Scaleway
+unminimize
+
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "en_US.UTF-8"
 timedatectl set-timezone Europe/Paris
