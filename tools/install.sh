@@ -55,8 +55,11 @@ curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
 apt-get update
 apt-get -y install mariadb-server
 
-# Fichier de configuration
-ln -sf ~/config/etc/mysql/conf.d/*.cnf /etc/mysql/conf.d
+# Fichier de configuration pour couper les bin
+tee -a /etc/mysql/mariadb.conf.d/bin.cnf <<EOF
+[mysqld]
+skip-log-bin
+EOF
 
 systemctl restart mysql
 
