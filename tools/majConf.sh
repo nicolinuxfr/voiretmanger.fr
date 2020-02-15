@@ -12,4 +12,4 @@ chmod 444 /etc/caddy/Caddyfile
 
 # Rechargements en cas de changement
 systemctl daemon-reload
-reload caddy
+systemctl reload caddy
