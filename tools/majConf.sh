@@ -5,7 +5,11 @@
 cd ~/config/
 git pull origin
 
+# Installation de la nouvelle version du fichier Caddyfile
 cp -rf etc/caddy/Caddyfile /etc/caddy/
 chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
+# Rechargements en cas de changement
+systemctl daemon-reload
+reload caddy
