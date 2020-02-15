@@ -20,16 +20,18 @@ echo "======== Création des dossiers nécessaires ========"
 
 mkdir ~/backup
 mkdir -p /var/log/caddy
-chown -R www-data:www-data /var/log/caddy
+chown -R caddy:caddy /var/log/caddy
 
-# Création du bon utilisateur avec les bons paramètres (cf https://github.com/mholt/caddy/tree/master/dist/init/linux-systemd)
-deluser www-data
-groupadd -g 33 www-data
-useradd \
-  -g www-data --no-user-group \
-  --home-dir /var/www --no-create-home \
-  --shell /usr/sbin/nologin \
-  --system --uid 33 www-data
+groupadd --system caddy
+
+useradd --system \
+	--gid caddy \
+	--create-home \
+	--home-dir /var/lib/caddy \
+	--shell /usr/sbin/nologin \
+	--comment "Caddy web server" \
+	caddy
+
 
 echo "======== Installation de PHP 7.4 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
@@ -66,11 +68,15 @@ cd /tmp/
 curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.14/caddy2_beta14_linux_amd64
 mv caddy2_beta14_linux_amd64 /usr/local/bin/caddy
 
-chown www-data:www-data /usr/local/bin/caddy
+chown caddy:caddy /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
 
 # Correction autorisations pour utiliser les ports 80 et 443
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
+
+cp -rf ~/config/etc/caddy/Caddyfile /etc/caddy/
+chown caddy:caddy /etc/caddy/Caddyfile
+chmod 444 /etc/caddy/Caddyfile
 
 # Création du service pour Caddy et démarrage
 systemctl enable ~/config/etc/systemd/system/caddy.service
