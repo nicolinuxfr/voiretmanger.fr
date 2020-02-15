@@ -15,7 +15,6 @@ voiretmanger.fr {
     root * /var/www/voiretmanger.fr
     encode zstd gzip
     php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
-
     file_server 
 
     # Redirect personnels
@@ -36,7 +35,6 @@ voiretmanger.fr {
     header favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 
 }
-
 
 files.voiretmanger.fr {
     root * /var/www/files.voiretmanger.fr
