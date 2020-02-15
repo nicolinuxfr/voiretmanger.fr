@@ -19,16 +19,8 @@ apt-get -y install libcap2-bin
 echo "======== Création des dossiers nécessaires ========"
 
 mkdir ~/backup
-mkdir -p /etc/caddy
-chown -R root:www-data /etc/caddy
-mkdir -p /etc/ssl/caddy
-chown -R root:www-data /etc/ssl/caddy
-chmod 0770 /etc/ssl/caddy
 mkdir -p /var/log/caddy
 chown -R www-data:www-data /var/log/caddy
-mkdir /var/www
-chown www-data:www-data /var/www
-chmod 555 /var/www
 
 # Création du bon utilisateur avec les bons paramètres (cf https://github.com/mholt/caddy/tree/master/dist/init/linux-systemd)
 deluser www-data
