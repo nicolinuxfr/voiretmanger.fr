@@ -4,7 +4,7 @@
 
 (logs) {
     log {
-        output file /var/log/caddy/{host}.access.log
+        output file /var/log/caddy/access.log
     }    
 }
 
@@ -32,15 +32,20 @@ voiretmanger.fr {
     header {
         # enable HSTS
         Strict-Transport-Security max-age=31536000;
+
+        # disable clients from sniffing the media type
+        X-Content-Type-Options nosniff
+        
         # clickjacking protection
         X-Frame-Options DENY
+
         # keep referrer data off of HTTP connections
         Referrer-Policy no-referrer-when-downgrade
     }
 
-    header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
-    header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
-    header favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
+    request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
+    request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
+    request_header favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 
 }
 
