@@ -65,8 +65,8 @@ echo "======== Installation de Caddy ========"
 # Installation du binaire
 ## Vérifier version ici : https://github.com/caddyserver/caddy/releases
 cd /tmp/
-curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.14/caddy2_beta14_linux_amd64
-mv caddy2_beta14_linux_amd64 /usr/local/bin/caddy
+curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.18/caddy2_beta18_linux_amd64
+mv caddy2_beta18_linux_amd64 /usr/local/bin/caddy
 
 chown caddy:caddy /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
