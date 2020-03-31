@@ -42,7 +42,7 @@ voiretmanger.fr {
 
     request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
     request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
-    request_header favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
+    request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 
 }
 
