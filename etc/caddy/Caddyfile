@@ -1,61 +1,61 @@
 {
-    email nicolinux@gmail.com
+	email nicolinux@gmail.com
 }
 
 (logs) {
-    log {
-        output file /var/log/caddy/access.log
-    }    
+	log {
+		output file /var/log/caddy/access.log
+	}
 }
 
-www.voiretmanger.fr, 
-nicolasfurno.fr, 
-www.nicolasfurno.fr, 
-nicolinux.fr, 
+www.voiretmanger.fr,
+nicolasfurno.fr,
+www.nicolasfurno.fr,
+nicolinux.fr,
 www.nicolinux.fr {
-    redir https://voiretmanger.fr{uri}/
+	redir https://voiretmanger.fr{uri}/
 }
 
 
 voiretmanger.fr {
-    root * /var/www/voiretmanger.fr
-    encode zstd gzip
-    php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
-    file_server 
+	root * /var/www/voiretmanger.fr
+	encode zstd gzip
+	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+	file_server
 
-    import logs
+	import logs
 
-    # Redirect personnels
+	# Redirect personnels
 	redir /a-propos/publicite /soutien
 	redir /archives/carte-des-restaurants /a-manger
 
-    header {
-        # enable HSTS
-        Strict-Transport-Security max-age=31536000;
+	header {
+		# enable HSTS
+		Strict-Transport-Security max-age=31536000;
 
-        # disable clients from sniffing the media type
-        X-Content-Type-Options nosniff
+		# disable clients from sniffing the media type
+		X-Content-Type-Options nosniff
 
-        # keep referrer data off of HTTP connections
-        Referrer-Policy no-referrer-when-downgrade
-    }
+		# keep referrer data off of HTTP connections
+		Referrer-Policy no-referrer-when-downgrade
+	}
 
-    request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
-    request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
-    request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 
 }
 
 files.voiretmanger.fr {
-    root * /var/www/files.voiretmanger.fr
-    encode zstd gzip
-    file_server browse
-    import logs
+	root * /var/www/files.voiretmanger.fr
+	encode zstd gzip
+	file_server browse
+	import logs
 }
 
 memoire.nicolasfurno.fr {
-    root * /var/www/memoire.nicolasfurno.fr
-    encode zstd gzip
-    file_server
-    import logs
+	root * /var/www/memoire.nicolasfurno.fr
+	encode zstd gzip
+	file_server
+	import logs
 }
