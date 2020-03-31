@@ -1,65 +1,61 @@
-www.voiretmanger.fr, nicolasfurno.fr, www.nicolasfurno.fr, nicolinux.fr, www.nicolinux.fr {
-    redir https://voiretmanger.fr{uri}/
+{
+	email nicolinux@gmail.com
+}
+
+(logs) {
+	log {
+		output file /var/log/caddy/access.log
+	}
+}
+
+www.voiretmanger.fr,
+nicolasfurno.fr,
+www.nicolasfurno.fr,
+nicolinux.fr,
+www.nicolinux.fr {
+	redir https://voiretmanger.fr{uri}/
 }
 
 
 voiretmanger.fr {
-    root /var/www/voiretmanger.fr
-    log /var/log/caddy/voiretmanger.access.log 
+	root * /var/www/voiretmanger.fr
+	encode zstd gzip
+	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+	file_server
 
-    errors /var/log/caddy/voiretmanger.error.log
+	import logs
 
-    gzip
-
-    # PHP-FPM with Unix socket
-    fastcgi / /var/run/php/php7.4-fpm.sock php {
-        read_timeout 600s
-        send_timeout 600s
-        }
-
-    # Redirect personnels
+	# Redirect personnels
 	redir /a-propos/publicite /soutien
 	redir /archives/carte-des-restaurants /a-manger
 
-    header / {
-        # Enable HTTP Strict Transport Security (HSTS) to force clients to always
-        # connect via HTTPS (do not use if only testing)
-        Strict-Transport-Security "max-age=31536000;"
-        # Enable cross-site filter (XSS) and tell browser to block detected attacks
-        X-XSS-Protection "1; mode=block"
-        # Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
-        X-Content-Type-Options "nosniff"
-        # Disallow the site to be rendered within a frame (clickjacking protection)
-        #X-Frame-Options "DENY"
+	header {
+		# enable HSTS
+		Strict-Transport-Security max-age=31536000;
+
+		# disable clients from sniffing the media type
+		X-Content-Type-Options nosniff
+
+		# keep referrer data off of HTTP connections
+		Referrer-Policy no-referrer-when-downgrade
 	}
 
-    internal /wp-config.php
+	request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 
-    header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
-    header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
-    header favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
-
-    # Routing for WordPress
-	rewrite / {
-		if {path} not_match ^\/wp-admin
-		to  {path} {path}/ /index.php?{query}
-	}
 }
 
-
 files.voiretmanger.fr {
-    root /var/www/files.voiretmanger.fr
-    log /var/log/caddy/files.access.log
-    errors /var/log/caddy/files.error.log
-
-     gzip
-
-     browse
+	root * /var/www/files.voiretmanger.fr
+	encode zstd gzip
+	file_server browse
+	import logs
 }
 
 memoire.nicolasfurno.fr {
-    root /var/www/memoire.nicolasfurno.fr
-    log /var/log/caddy/memoire.access.log
-    errors /var/log/caddy/memoire.error.log
-    gzip
+	root * /var/www/memoire.nicolasfurno.fr
+	encode zstd gzip
+	file_server
+	import logs
 }

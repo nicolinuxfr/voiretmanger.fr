@@ -3,6 +3,9 @@
 # Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 18.04 LTS.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
+# Pour Scaleway
+unminimize
+
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "en_US.UTF-8"
 timedatectl set-timezone Europe/Paris
@@ -14,28 +17,21 @@ apt-get -y dist-upgrade
 apt-get -y install libcap2-bin
 
 echo "======== Création des dossiers nécessaires ========"
-mkdir ~/backup
-mkdir -p /etc/caddy
-chown -R root:www-data /etc/caddy
-mkdir -p /etc/ssl/caddy
-chown -R root:www-data /etc/ssl/caddy
-chmod 0770 /etc/ssl/caddy
-mkdir -p /var/log/caddy
-chown -R www-data:www-data /var/log/caddy
-mkdir /var/www
-chown www-data:www-data /var/www
-chmod 555 /var/www
-mkdir -p /var/www/voiretmanger.fr
-mkdir -p /var/www/files.voiretmanger.fr
 
-# Création du bon utilisateur avec les bons paramètres (cf https://github.com/mholt/caddy/tree/master/dist/init/linux-systemd)
-deluser www-data
-groupadd -g 33 www-data
-useradd \
-  -g www-data --no-user-group \
-  --home-dir /var/www --no-create-home \
-  --shell /usr/sbin/nologin \
-  --system --uid 33 www-data
+mkdir ~/backup
+mkdir -p /var/log/caddy
+chown -R caddy:caddy /var/log/caddy
+
+groupadd --system caddy
+
+useradd --system \
+	--gid caddy \
+	--create-home \
+	--home-dir /var/lib/caddy \
+	--shell /usr/sbin/nologin \
+	--comment "Caddy web server" \
+	caddy
+
 
 echo "======== Installation de PHP 7.4 ========"
 add-apt-repository -y ppa:nilarimogard/webupd8
@@ -56,26 +52,37 @@ curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
 apt-get update
 apt-get -y install mariadb-server
 
-# Fichier de configuration
-ln -sf ~/config/etc/mysql/conf.d/*.cnf /etc/mysql/conf.d
+# Fichier de configuration pour couper les bin
+tee -a /etc/mysql/mariadb.conf.d/bin.cnf <<EOF
+[mysqld]
+skip-log-bin
+EOF
 
 systemctl restart mysql
 
 echo "======== Installation de Caddy ========"
-curl https://getcaddy.com | bash -s personal
-chown root:root /usr/local/bin/caddy
+
+# Installation du binaire
+## Vérifier version ici : https://github.com/caddyserver/caddy/releases
+cd /tmp/
+curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.18/caddy2_beta18_linux_amd64
+mv caddy2_beta18_linux_amd64 /usr/local/bin/caddy
+
+chown caddy:caddy /usr/local/bin/caddy
 chmod 755 /usr/local/bin/caddy
 
 # Correction autorisations pour utiliser les ports 80 et 443
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
-# Fichier de configuration
-cp ~/config/etc/caddy/Caddyfile /etc/caddy/
-chown www-data:www-data /etc/caddy/Caddyfile
+cp -rf ~/config/etc/caddy/Caddyfile /etc/caddy/
+chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
-# Création du service
+# Création du service pour Caddy et démarrage
 systemctl enable ~/config/etc/systemd/system/caddy.service
+systemctl daemon-reload
+systemctl enable caddy
+systemctl start caddy
 
 echo "======== Installation de WP-CLI ========"
 # Installation et déplacement au bon endroit
@@ -124,9 +131,9 @@ echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant
 
 echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/www/* root@$IP:/var/www\n"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /etc/ssl/caddy/* root@$IP:/etc/ssl/caddy\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/lib/caddy/.local/share/caddy/* root@$IP:/var/lib/caddy/.local/share/caddy\n"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup root@$IP:~/backup\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup/* root@$IP:~/backup\n"
 
 echo "wp --allow-root db export - > ~/dump.sql\n"
 
