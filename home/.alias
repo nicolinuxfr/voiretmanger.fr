@@ -4,21 +4,18 @@ alias wp="wp --allow-root"
 # GESTION SERVEUR
 alias maj="apt-get update"
 alias Maj="apt-get upgrade"
-#alias Maj2="~/config/tools/update.sh"
-alias files="find . -type f | wc -l"
+alias caddyMaj="~/config/tools/update-caddy.sh"
 alias majConf="~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
 
 # Fichiers
 alias duf='du -sh *'
 alias df='df -h'
+alias files="find . -type f | wc -l"
 
 # LOGS
-alias logs="tail -f /var/log/caddy/voiretmanger.access.log"
-alias logsFile="tail -f /var/log/caddy/files.access.log"
-alias logsErrors="tail -f /var/log/caddy/voiretmanger.error.log"
+alias logs="tail -f /var/log/caddy/access.log"
 alias syslog="tail -f /var/log/syslog"
-alias caddylog="syslog | grep 'caddy'"
 
 # Services
 alias status="systemctl status"
