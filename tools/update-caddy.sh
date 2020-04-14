@@ -17,3 +17,6 @@ chmod 755 /usr/local/bin/caddy
 setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
 service caddy restart
+
+# Nettoyage du téléchargement
+rm caddy_*
