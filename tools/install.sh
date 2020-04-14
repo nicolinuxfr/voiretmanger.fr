@@ -66,7 +66,7 @@ echo "======== Installation de Caddy ========"
 ## Vérifier version ici : https://github.com/caddyserver/caddy/releases
 VERSION="2.0.0-rc.3"
 cd /tmp/
-curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v$VERSION/caddy_${VERSION}_Linux_x86_64.tar.gz
+curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v$VERSION/caddy_${VERSION}_linux_amd64.tar.gz
 tar -xzf caddy_*
 
 chown caddy:caddy /usr/local/bin/caddy
