@@ -2,12 +2,6 @@
 	email nicolinux@gmail.com
 }
 
-(logs) {
-	log {
-		output file /var/log/caddy/access.log
-	}
-}
-
 www.voiretmanger.fr,
 nicolasfurno.fr,
 www.nicolasfurno.fr,
@@ -23,7 +17,9 @@ voiretmanger.fr {
 	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 	file_server
 
-	import logs
+	log {
+		output file /var/log/caddy/voiretmanger.fr.access.log
+	}
 
 	# Redirect personnels
 	redir /a-propos/publicite /soutien
@@ -50,12 +46,16 @@ files.voiretmanger.fr {
 	root * /var/www/files.voiretmanger.fr
 	encode zstd gzip
 	file_server browse
-	import logs
+	log {
+		output file /var/log/caddy/files.voiretmanger.fr.access.log
+	}
 }
 
 memoire.nicolasfurno.fr {
 	root * /var/www/memoire.nicolasfurno.fr
 	encode zstd gzip
 	file_server
-	import logs
+	log {
+		output file /var/log/caddy/memoire.nicolasfurno.fr.access.log
+	}
 }
