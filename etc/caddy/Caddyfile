@@ -48,6 +48,7 @@ voiretmanger.fr {
         php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
     }
 	
+	header cacheSource wp
 	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 
 	request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
