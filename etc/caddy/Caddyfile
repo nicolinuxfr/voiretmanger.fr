@@ -35,14 +35,9 @@ voiretmanger.fr {
 		Referrer-Policy no-referrer-when-downgrade
 	}
 
-	request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
-	request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
-	request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
-
-
 	@cache {
 		not {
-			header_regexp "Cookie" "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in"
+			header_regexp Cookie "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in"
 			path_regexp "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(index)?.xml|[a-z0-9-]+-sitemap([0-9]+)?.xml)"
 		}
 	}
@@ -54,6 +49,10 @@ voiretmanger.fr {
     }
 	
 	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+
+	request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
+	request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 }
 
 files.voiretmanger.fr {
