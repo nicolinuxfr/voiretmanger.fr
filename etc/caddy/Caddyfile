@@ -14,7 +14,6 @@ www.nicolinux.fr {
 voiretmanger.fr {
 	root * /var/www/voiretmanger.fr
 	encode zstd gzip
-	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 	file_server
 
 	log {
@@ -40,6 +39,20 @@ voiretmanger.fr {
 	request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
 	request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 
+
+	@cache {
+		not {
+			header_regexp Cookie "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in"
+			path_regexp "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(index)?.xml|[a-z0-9-]+-sitemap([0-9]+)?.xml)"
+		}
+	}
+
+	route @cache {
+		try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
+        php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+    }
+	
+	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 }
 
 files.voiretmanger.fr {
