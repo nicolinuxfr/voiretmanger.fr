@@ -42,23 +42,22 @@ voiretmanger.fr {
 		Referrer-Policy no-referrer-when-downgrade
 	}
 
-	@cache {
-		not {
-			header_regexp Cookie "(comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in)"
-			path_regexp "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(index)?.xml|[a-z0-9-]+-sitemap([0-9]+)?.xml)"
-			method POST
-			expression {query} != ''
-		}
+	@notcache {
+		header_regexp Cookie "(comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in)"
+		path_regexp "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(index)?.xml|[a-z0-9-]+-sitemap([0-9]+)?.xml)"
+		method POST
+		expression {query} != ''
 	}
 
-	route @cache {
-		header cache file
-		try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
-        php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+	route @notcache {
+		header cache wp
+		php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
     }
+
+	header cache file
+	try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
+    php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 	
-	header cache wp
-	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 
 }
 
