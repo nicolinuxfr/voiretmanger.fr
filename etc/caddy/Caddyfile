@@ -12,8 +12,8 @@ www.nicolinux.fr {
 
 (static) {
 	@static {
-  		file
-  		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.json
+		file
+		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.json
 	}
 	header @static Cache-Control max-age=5184000
 }
@@ -24,6 +24,9 @@ voiretmanger.fr {
 	encode zstd gzip
 	file_server
 	import static
+	
+	try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
+	php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 
 	log {
 		output file /var/log/caddy/voiretmanger.fr.access.log
@@ -41,24 +44,6 @@ voiretmanger.fr {
 		# keep referrer data off of HTTP connections
 		Referrer-Policy no-referrer-when-downgrade
 	}
-
-	@notcache {
-		header_regexp Cookie "(comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in)"
-		path_regexp "(/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(index)?.xml|[a-z0-9-]+-sitemap([0-9]+)?.xml)"
-	}
-
-	route @notcache {
-		header cache wp
-		php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
-    }
-
-	route {
-		header cache file
-		try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
-		php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
-	}
-
-	
 
 }
 
