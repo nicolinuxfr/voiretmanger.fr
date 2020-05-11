@@ -18,20 +18,7 @@ www.nicolinux.fr {
 	header @static Cache-Control max-age=5184000
 }
 
-
-voiretmanger.fr {
-	root * /var/www/voiretmanger.fr
-	encode zstd gzip
-	file_server
-	import static
-	log {
-		output file /var/log/caddy/voiretmanger.fr.access.log
-	}
-
-	# Redirect personnels
-	redir /a-propos/publicite /soutien
-	redir /archives/carte-des-restaurants /a-manger
-
+(security) {
 	header {
 		# enable HSTS
 		Strict-Transport-Security max-age=31536000;
@@ -40,6 +27,22 @@ voiretmanger.fr {
 		# keep referrer data off of HTTP connections
 		Referrer-Policy no-referrer-when-downgrade
 	}
+}
+
+
+voiretmanger.fr {
+	root * /var/www/voiretmanger.fr
+	encode zstd gzip
+	file_server
+	import static
+	import security
+	log {
+		output file /var/log/caddy/voiretmanger.fr.access.log
+	}
+
+	# Redirect personnels
+	redir /a-propos/publicite /soutien
+	redir /archives/carte-des-restaurants /a-manger
 
 	@notcache {
 		header_regexp Cookie "(comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in)"
@@ -58,10 +61,6 @@ voiretmanger.fr {
 		try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
 		php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 	}
-	
-	request_header /wp-content Cache-Control "public, max-age=2592000, s-maxage=86400"
-	request_header /wp-includes Cache-Control "public, max-age=2592000, s-maxage=86400"
-	request_header /favicon.ico Cache-Control "public, max-age=2592000, s-maxage=86400"
 }
 
 files.voiretmanger.fr {
@@ -72,6 +71,7 @@ files.voiretmanger.fr {
 		output file /var/log/caddy/files.voiretmanger.fr.access.log
 	}
 	import static
+	import security
 }
 
 memoire.nicolasfurno.fr {
@@ -82,4 +82,5 @@ memoire.nicolasfurno.fr {
 		output file /var/log/caddy/memoire.nicolasfurno.fr.access.log
 	}
 	import static
+	import security
 }
