@@ -1,20 +1,17 @@
 #!/bin/bash
 
-# Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 18.04 LTS.
+# Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 20.04 LTS.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
-
-# Pour Scaleway
-unminimize
 
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "en_US.UTF-8"
 timedatectl set-timezone Europe/Paris
 
 echo "======== Mise à jour initiale ========"
-apt-get update
-apt-get -y upgrade
-apt-get -y dist-upgrade
-apt-get -y install libcap2-bin
+apt update
+apt -y upgrade
+apt -y dist-upgrade
+apt -y install libcap2-bin
 
 echo "======== Création des dossiers nécessaires ========"
 
@@ -22,24 +19,10 @@ mkdir ~/backup
 mkdir -p /var/log/caddy
 chown -R caddy:caddy /var/log/caddy
 
-groupadd --system caddy
-
-useradd --system \
-	--gid caddy \
-	--create-home \
-	--home-dir /var/lib/caddy \
-	--shell /usr/sbin/nologin \
-	--comment "Caddy web server" \
-	caddy
-
-
 echo "======== Installation de PHP 7.4 ========"
-add-apt-repository -y ppa:nilarimogard/webupd8
-add-apt-repository -y ppa:ondrej/php
-apt-get update
-apt-get -y install launchpad-getkeys
-apt-get -y install php7.4 php7.4-cli php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-mbstring php7.4-xml php7.4-json php7.4-xmlrpc php7.4-zip php7.4-bcmath imagemagick php-imagick
-launchpad-getkeys
+apt update
+apt -y install php php-cli php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-json php-xmlrpc php-zip php-bcmath imagemagick php-imagick
+
 
 # Fichier de configuration
 ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
@@ -47,42 +30,19 @@ ln -sf ~/config/etc/php/pool.d/*.conf /etc/php/7.4/fpm/pool.d
 
 systemctl restart php7.4-fpm
 
-echo "======== Installation de MariaDB ========"
-curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
-apt-get update
-apt-get -y install mariadb-server
-
-# Fichier de configuration pour couper les bin
-tee -a /etc/mysql/mariadb.conf.d/bin.cnf <<EOF
-[mysqld]
-skip-log-bin
-EOF
-
-systemctl restart mysql
+echo "======== Installation de MySQL ========"
+apt-get -y install mysql-server
 
 echo "======== Installation de Caddy ========"
-
-# Installation du binaire
-## Vérifier version ici : https://github.com/caddyserver/caddy/releases
-VERSION="2.0.0-rc.3"
-cd /tmp/
-curl --retry 5 -LO https://github.com/caddyserver/caddy/releases/download/v$VERSION/caddy_${VERSION}_linux_amd64.tar.gz
-tar -xzf caddy_*
-
-chown caddy:caddy /usr/local/bin/caddy
-chmod 755 /usr/local/bin/caddy
-
-# Correction autorisations pour utiliser les ports 80 et 443
-setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
+echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
+    | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
+apt update
+apt install caddy
 
 cp -rf ~/config/etc/caddy/Caddyfile /etc/caddy/
 chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
-# Création du service pour Caddy et démarrage
-systemctl enable ~/config/etc/systemd/system/caddy.service
-systemctl daemon-reload
-systemctl enable caddy
 systemctl start caddy
 
 echo "======== Installation de WP-CLI ========"
