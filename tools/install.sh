@@ -21,8 +21,7 @@ chown -R caddy:caddy /var/log/caddy
 
 echo "======== Installation de PHP 7.4 ========"
 apt update
-apt -y install php php-cli php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-json php-xmlrpc php-zip php-bcmath imagemagick php-imagick
-
+apt -y install php-cli php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-json php-xmlrpc php-zip php-bcmath imagemagick php-imagick
 
 # Fichier de configuration
 ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
