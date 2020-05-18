@@ -23,7 +23,8 @@ read passwddb
 
 mysql -u root -p$passwdroot <<EOF
 CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-GRANT ALL ON wordpress.* TO 'voiretmanger'@'localhost' IDENTIFIED BY '$passwddb';
+CREATE USER 'voiretmanger'@'localhost' IDENTIFIED BY '$passwddb';
+GRANT ALL ON wordpress.* TO 'voiretmanger'@'localhost';
 USE wordpress;
 SOURCE /root/dump.sql;
 FLUSH PRIVILEGES;
