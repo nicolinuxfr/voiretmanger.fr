@@ -11,7 +11,19 @@ echo "======== Mise à jour initiale ========"
 apt update
 apt -y upgrade
 apt -y dist-upgrade
-apt -y install libcap2-bin
+apt -y install libcap2-bin jq
+
+echo "======== Installation de Caddy ========"
+echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
+    | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
+apt update
+apt install caddy
+
+cp -rf ~/config/etc/caddy/Caddyfile /etc/caddy/
+chown caddy:caddy /etc/caddy/Caddyfile
+chmod 444 /etc/caddy/Caddyfile
+
+systemctl start caddy
 
 echo "======== Création des dossiers nécessaires ========"
 
@@ -31,18 +43,6 @@ systemctl restart php7.4-fpm
 
 echo "======== Installation de MySQL ========"
 apt-get -y install mysql-server
-
-echo "======== Installation de Caddy ========"
-echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
-    | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
-apt update
-apt install caddy
-
-cp -rf ~/config/etc/caddy/Caddyfile /etc/caddy/
-chown caddy:caddy /etc/caddy/Caddyfile
-chmod 444 /etc/caddy/Caddyfile
-
-systemctl start caddy
 
 echo "======== Installation de WP-CLI ========"
 # Installation et déplacement au bon endroit
