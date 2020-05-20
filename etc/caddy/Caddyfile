@@ -10,7 +10,8 @@ blog.nicolasfurno.fr,
 nicolinux.fr,
 blog.nicolinux.fr,
 www.nicolinux.fr,
-nicoflo.fr {
+nicoflo.fr,
+www.nicoflo.fr {
 	redir https://voiretmanger.fr{uri}/
 }
 
