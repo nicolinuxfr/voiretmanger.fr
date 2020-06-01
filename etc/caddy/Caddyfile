@@ -3,10 +3,15 @@
 }
 
 www.voiretmanger.fr,
+blog.voiretmanger.fr,
 nicolasfurno.fr,
 www.nicolasfurno.fr,
+blog.nicolasfurno.fr,
 nicolinux.fr,
-www.nicolinux.fr {
+blog.nicolinux.fr,
+www.nicolinux.fr,
+nicoflo.fr,
+www.nicoflo.fr {
 	redir https://voiretmanger.fr{uri}/
 }
 
@@ -52,11 +57,8 @@ voiretmanger.fr {
     }
 
     route @cache {
-        header cache file
         try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
     }
-        
-    header cache wp
     php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 }
 

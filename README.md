@@ -6,12 +6,12 @@ Vous pouvez utiliser ce projet comme base pour le vôtre. **Ne l'utilisez pas di
 
 ## Que fait le script d'installation ?
 
-Le script installe ces outils sur une base d'Ubuntu 18.04 :
+Le script installe ces outils sur une base d'Ubuntu 20.04 :
 
 - Serveur web :
-    - [Caddy 2](https://github.com/mholt/caddy) ;
+    - [Caddy 2](https://caddyserver.com) ;
     - PHP 7.4 ;
-    - MariaDB 10.4 ;
+    - MySQL 8 ;
     - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :
     - ZSH et [oh-my-zsh](http://ohmyz.sh).
@@ -27,7 +27,7 @@ Il crée enfin les dossiers nécessaires pour héberger les sites et les logs :
 
 ### Configuration initiale du serveur
 
-Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 18.04 et d'un compte root. 
+Le script d'installation est conçu pour être exécuté à partir d'un serveur sous Ubuntu 20.04 et d'un compte avec les autorisations root. 
 
 
 ### Récupérer le dépôt

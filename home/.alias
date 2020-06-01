@@ -2,9 +2,8 @@
 alias wp="wp --allow-root"
 
 # GESTION SERVEUR
-alias maj="apt-get update"
-alias Maj="apt-get upgrade"
-alias caddyMaj="~/config/tools/update-caddy.sh"
+alias maj="apt update"
+alias Maj="apt upgrade"
 alias majConf="~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
 
