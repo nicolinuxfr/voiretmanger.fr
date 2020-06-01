@@ -44,6 +44,13 @@ systemctl restart php7.4-fpm
 echo "======== Installation de MySQL ========"
 apt-get -y install mysql-server
 
+tee -a /etc/mysql/mysql.conf.d/binlog.cnf <<EOF
+[mysqld]
+disable_log_bin
+EOF
+
+systemctl restart mysql
+
 echo "======== Installation de WP-CLI ========"
 # Installation et déplacement au bon endroit
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
