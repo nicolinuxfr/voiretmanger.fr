@@ -62,6 +62,18 @@ voiretmanger.fr {
     php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 }
 
+dev.voiretmanger.fr {
+	root * /var/www/dev.voiretmanger.fr
+	encode zstd gzip
+	file_server
+	import static
+	import security
+	log {
+		output file /var/log/caddy/dev.voiretmanger.fr.access.log
+	}
+    php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+}
+
 files.voiretmanger.fr {
 	root * /var/www/files.voiretmanger.fr
 	encode zstd gzip
