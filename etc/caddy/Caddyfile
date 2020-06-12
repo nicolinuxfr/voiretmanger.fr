@@ -63,7 +63,7 @@ voiretmanger.fr {
 }
 
 dev.voiretmanger.fr {
-	root * /var/www/dev.voiretmanger.fr
+	root * /var/www/dev.voiretmanger.fr/public
 	encode zstd gzip
 	file_server
 	import static
