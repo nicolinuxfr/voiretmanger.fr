@@ -2,7 +2,7 @@
 alias wp="wp --allow-root"
 
 # GESTION SERVEUR
-alias maj="apt update"
+alias maj="apt update && apt list --upgradable"
 alias Maj="apt upgrade"
 alias majConf="~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
