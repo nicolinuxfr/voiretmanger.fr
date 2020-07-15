@@ -19,7 +19,7 @@ www.nicoflo.fr {
 (static) {
 	@static {
 		file
-		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.json
+		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.json
 	}
 	header @static Cache-Control max-age=5184000
 }
@@ -60,6 +60,7 @@ voiretmanger.fr {
     route @cache {
         try_files /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
     }
+
     php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 }
 
@@ -71,6 +72,18 @@ dev.voiretmanger.fr {
 	import security
 	log {
 		output file /var/log/caddy/dev.voiretmanger.fr.access.log
+	}
+    php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
+}
+
+dev2.voiretmanger.fr {
+	root * /var/www/dev2.voiretmanger.fr
+	encode zstd gzip
+	file_server
+	import static
+	import security
+	log {
+		output file /var/log/caddy/dev2.voiretmanger.fr.access.log
 	}
     php_fastcgi unix//run/php/php7.4-fpm-caddy.sock
 }
