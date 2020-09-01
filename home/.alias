@@ -6,6 +6,7 @@ alias maj="apt update && apt list --upgradable"
 alias Maj="apt upgrade"
 alias majConf="~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
+alias cache="find /var/www/voiretmanger.fr/wp-content/cache/cache-enabler/voiretmanger.fr -type f | wc -l"
 
 # Fichiers
 alias duf='du -sh *'
