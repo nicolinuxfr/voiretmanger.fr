@@ -84,6 +84,8 @@ su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmy
 su ubuntu -c 'ln -sf ~/config/home/.alias ~/.alias'
 su ubuntu -c 'ln -sf ~/config/home/.zshrc ~/.zshrc'
 
+chsh -s $(which zsh) ubuntu
+
 # Installation des crons automatiques
 
 ## Création des fichiers de log
