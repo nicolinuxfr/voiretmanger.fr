@@ -32,8 +32,9 @@ mkdir -p /var/log/caddy
 chown -R caddy:caddy /var/log/caddy
 
 echo "======== Installation de PHP 7.4 ========"
+add-apt-repository ppa:ondrej/php
 apt update
-apt -y install php-cli php-fpm php-mysql php-curl php-gd php-mbstring php-xml php-json php-xmlrpc php-zip php-bcmath imagemagick php-imagick
+apt -y install php7.4 php7.4-{bcmath,cli,curl,fpm,gd,imagick,json,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
 # Fichier de configuration
 ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
@@ -59,6 +60,20 @@ mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
 ln -s ~/config/home/.wp-cli ~/
+
+echo "======== Configuration du pare-feu ========"
+ufw allow ssh
+ufw allow http
+ufw allow https
+ufw enable
+
+echo "======== Configuration du SWAP ========"
+# Configuration d'un espace swap (merci Composer…)
+fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 echo "======== Installation des quelques outils ========"
 echo "zsh et oh-my-zsh (Shell 2.0)"
