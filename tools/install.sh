@@ -27,12 +27,12 @@ systemctl start caddy
 
 echo "======== Création des dossiers nécessaires ========"
 
-mkdir ~/backup
+su ubuntu -c 'mkdir ~/backup'
 mkdir -p /var/log/caddy
 chown -R caddy:caddy /var/log/caddy
 
 echo "======== Installation de PHP 7.4 ========"
-add-apt-repository ppa:ondrej/php
+add-apt-repository -y ppa:ondrej/php
 apt update
 apt -y install php7.4 php7.4-{bcmath,cli,curl,fpm,gd,imagick,json,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
@@ -59,7 +59,7 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
-ln -s ~/config/home/.wp-cli ~/
+su ubuntu -c 'ln -s ~/config/home/.wp-cli ~/'
 
 echo "======== Configuration du pare-feu ========"
 ufw allow ssh
@@ -78,15 +78,11 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 echo "======== Installation des quelques outils ========"
 echo "zsh et oh-my-zsh (Shell 2.0)"
 apt-get -y install zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
-  echo "Could not install Oh My Zsh" >/dev/stderr
-  exit 1
-}
-ln -s ~/config/home/.alias ~/.alias
-ln -sf ~/config/home/.zshrc ~/.zshrc
 
-# Configuration de zsh comme défaut pour l'utilisateur 
-chsh -s $(which zsh)
+su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended' 
+
+su ubuntu -c 'ln -sf ~/config/home/.alias ~/.alias'
+su ubuntu -c 'ln -sf ~/config/home/.zshrc ~/.zshrc'
 
 # Installation des crons automatiques
 
