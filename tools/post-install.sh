@@ -10,7 +10,7 @@ mysql_secure_installation
 echo "Saisir le mot de passe root mysql : "
 read passwdroot
 
-tee -a ~/.my.cnf <<EOF
+tee -a /home/ubuntu/.my.cnf <<EOF
 [client]
 user=root
 password="$passwdroot"
@@ -26,7 +26,7 @@ CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 CREATE USER 'voiretmanger'@'localhost' IDENTIFIED BY '$passwddb';
 GRANT ALL ON wordpress.* TO 'voiretmanger'@'localhost';
 USE wordpress;
-SOURCE /root/dump.sql;
+SOURCE /home/ubuntu/dump.sql;
 FLUSH PRIVILEGES;
 EOF
 
