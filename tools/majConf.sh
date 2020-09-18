@@ -13,5 +13,4 @@ chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
 # Rechargements en cas de changement
-systemctl daemon-reload
 systemctl reload caddy
