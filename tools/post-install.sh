@@ -16,7 +16,7 @@ user=root
 password="$passwdroot"
 host=localhost
 EOF
-chmod 0600 ~/.my.cnf
+chmod 0600 /home/ubuntu/.my.cnf
 
 echo "Saisir le mot de passe de la db : "
 read passwddb

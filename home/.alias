@@ -1,8 +1,10 @@
 # PERMISSIONS
-alias wp="wp --allow-root"
 alias systemctl="sudo systemctl"
 alias nano="sudo nano"
 alias apt="sudo apt"
+alias mysql="sudo mysql"
+alias wp="wp --allow-root"
+
 
 # GESTION SERVEUR
 alias maj="apt update && apt list --upgradable"
@@ -11,8 +13,8 @@ alias majConf="sudo ~/config/tools/majConf.sh"
 alias db="~/config/tools/db.sh"
 alias cache="find /var/www/voiretmanger.fr/wp-content/cache/cache-enabler/voiretmanger.fr -type f | wc -l"
 
-# Fichiers
-alias duf='du -sh *'
+# FICHIERS
+alias duf='sudo du -sh *'
 alias df='df -h'
 alias files="find . -type f | wc -l"
 
@@ -20,7 +22,7 @@ alias files="find . -type f | wc -l"
 alias logs="tail -f /var/log/caddy/voiretmanger.fr.access.log | jq"
 alias syslog="tail -f /var/log/syslog"
 
-# Services
+# SERVICES
 alias status="systemctl status"
 alias restart="systemctl restart"
 alias reload="systemctl reload"

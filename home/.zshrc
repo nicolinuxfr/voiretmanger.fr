@@ -90,8 +90,5 @@ export LANGUAGE="en_US.UTF-8"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export iterm2_hostname=voiretmanger.fr
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export CONFIG="/home/ubuntu/config"
 
-# Telemetrie dans Caddy
-export CADDY_TELEMETRY=on

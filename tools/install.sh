@@ -3,6 +3,8 @@
 # Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 20.04 LTS.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
+CONFIG="/home/ubuntu/config"
+
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "en_US.UTF-8"
 timedatectl set-timezone Europe/Paris
@@ -19,7 +21,7 @@ echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
 apt update
 apt install caddy
 
-cp -rf ~/config/etc/caddy/Caddyfile /etc/caddy/
+cp -rf $CONFIG/etc/caddy/Caddyfile /etc/caddy/
 chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
@@ -37,8 +39,8 @@ apt update
 apt -y install php7.4 php7.4-{bcmath,cli,curl,fpm,gd,imagick,json,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
 # Fichier de configuration
-ln -sf ~/config/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
-ln -sf ~/config/etc/php/pool.d/*.conf /etc/php/7.4/fpm/pool.d
+ln -sf $CONFIG/etc/php/conf.d/*.ini /etc/php/7.4/fpm/conf.d
+ln -sf $CONFIG/etc/php/pool.d/*.conf /etc/php/7.4/fpm/pool.d
 
 systemctl restart php7.4-fpm
 
@@ -59,7 +61,7 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
-su ubuntu -c 'ln -s ~/config/home/.wp-cli ~/'
+su ubuntu -c 'ln -s $CONFIG/home/.wp-cli ~/'
 
 echo "======== Configuration du pare-feu ========"
 ufw allow ssh
@@ -81,8 +83,8 @@ apt-get -y install zsh
 
 su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended' 
 
-su ubuntu -c 'ln -sf ~/config/home/.alias ~/.alias'
-su ubuntu -c 'ln -sf ~/config/home/.zshrc ~/.zshrc'
+su ubuntu -c 'ln -sf $CONFIG/home/.alias ~/.alias'
+su ubuntu -c 'ln -sf $CONFIG/home/.zshrc ~/.zshrc'
 
 chsh -s $(which zsh) ubuntu
 
@@ -101,6 +103,13 @@ EOF
 apt-get -y autoremove
 
 # Préparation de la suite
+
+mkdir /var/www
+mkdir -p /var/lib/caddy/.local/share/caddy
+chown ubuntu:ubuntu /var/www
+chown ubuntu:ubuntu /var/lib/caddy/.local/share/caddy
+
+
 IP=`curl -sS ipecho.net/plain`
 
 echo "\n======== Script d'installation terminé ========\n\n\n"
