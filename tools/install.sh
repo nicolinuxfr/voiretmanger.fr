@@ -27,6 +27,8 @@ chmod 444 /etc/caddy/Caddyfile
 
 systemctl start caddy
 
+usermod -a -G caddy ubuntu
+
 echo "======== Création des dossiers nécessaires ========"
 
 su ubuntu -c 'mkdir ~/backup'
@@ -44,8 +46,10 @@ ln -sf $CONFIG/etc/php/pool.d/*.conf /etc/php/7.4/fpm/pool.d
 
 systemctl restart php7.4-fpm
 
+usermod -a -G www-data ubuntu
+
 echo "======== Installation de MySQL ========"
-apt-get -y install mysql-server
+apt -y install mysql-server
 
 tee -a /etc/mysql/mysql.conf.d/binlog.cnf <<EOF
 [mysqld]
@@ -62,6 +66,12 @@ mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
 su ubuntu -c 'ln -s $CONFIG/home/.wp-cli ~/'
+
+echo "======== Installation de Composer ========"
+apt -y install unzip
+cd /tmp
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 echo "======== Configuration du pare-feu ========"
 ufw allow ssh
@@ -92,10 +102,11 @@ chsh -s $(which zsh) ubuntu
 
 ## Création des fichiers de log
 touch /var/log/mysql/backup.log
+chown ubuntu:ubuntu /var/log/mysql/backup.log
 
 ### Création du cron
 tee -a /etc/cron.d/refurb <<EOF
-0 0 * * * root ~/config/tools/db.sh > /var/log/mysql/backup.log 2>&1
+0 0 * * * ubuntu $CONFIG/tools/db.sh > /var/log/mysql/backup.log 2>&1
 EOF
 
 
