@@ -1,0 +1,20 @@
+$TTL 86400
+@	IN SOA dns106.ovh.net. tech.ovh.net. (2020091200 86400 3600 3600000 300)
+			   IN NS     ns106.ovh.net.
+			   IN NS     dns106.ovh.net.
+			   IN MX     100 mxb.ovh.net.
+			   IN MX     1 mx1.ovh.net.
+			   IN MX     5 mx2.ovh.net.
+			   IN A      51.210.254.29
+			   IN AAAA   2001:41d0:304:200::da00
+		   600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
+blog           IN A      51.210.254.29
+blog           IN AAAA   2001:41d0:304:200::da00
+ftp            IN CNAME  ftp.mediaplan.ovh.net.
+mail           IN CNAME  ns0.ovh.net.
+memoire        IN A      51.210.254.29
+memoire        IN AAAA   2001:41d0:304:200::da00
+pop3           IN CNAME  ns0.ovh.net.
+smtp           IN CNAME  ns0.ovh.net.
+www            IN A      51.210.254.29
+www            IN AAAA   2001:41d0:304:200::da00
