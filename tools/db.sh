@@ -5,6 +5,8 @@ DATE=`date +%Y-%m-%d`
 
 echo "Optimisation et sauvegarde de la base de données : $DATE"
 
+cd /var/www/voiretmanger.fr/
+
 # Optimisations (basé sur https://gist.github.com/lukecav/66f1039edcd2827fd1bde82dce86a2be)
 /usr/local/bin/wp --allow-root transient delete --expired 
 /usr/local/bin/wp --allow-root cache flush
