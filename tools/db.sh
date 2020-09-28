@@ -16,5 +16,8 @@ cd /var/www/voiretmanger.fr/
 # Sauvegarde
 /usr/local/bin/wp --allow-root db export - | gzip > /home/ubuntu/backup/$DATE.sql.gz
 
+# Permissions
+chown -R ubuntu:ubuntu /home/ubuntu/backup/
+
 # Nettoyage des anciennes sauvegardes (5 derniers jours)
-find ~/backup/ -maxdepth 1 -type f -mmin +7200 | xargs rm -rf
+find /home/ubuntu/backup/ -maxdepth 1 -type f -mmin +7200 | xargs rm -rf
