@@ -4,6 +4,7 @@ $TTL 600
 						 IN NS     ns200.anycast.me.
 						 IN MX     1 redirect.ovh.net.
 						 IN A      51.210.254.29
+						 IN AAAA   2001:41d0:304:200::da00
 _jabber._tcp             IN CNAME  _jabber._tcp.redirect.ovh.net.
 _sip._udp                IN CNAME  _sip._udp.redirect.ovh.net.
 _xmpp-client._tcp        IN CNAME  _xmpp-client._tcp.redirect.ovh.net.
