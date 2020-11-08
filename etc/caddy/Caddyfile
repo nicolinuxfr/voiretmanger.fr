@@ -84,7 +84,6 @@ files.voiretmanger.fr {
 		output file /var/log/caddy/files.voiretmanger.fr.access.log
 	}
 	import static
-	import security
 }
 
 memoire.nicolasfurno.fr {
