@@ -105,6 +105,5 @@ memoire.nicolasfurno.fr {
 		output file /var/log/caddy/memoire.nicolasfurno.fr.access.log
 	}
 	import static
-	import security
 	import 404
 }
