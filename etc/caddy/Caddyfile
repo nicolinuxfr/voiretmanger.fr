@@ -35,6 +35,13 @@ www.nicoflo.fr {
 	}
 }
 
+(404) {
+	@missingFile not file {path} {path}.md
+	handle @missingFile {
+		respond * "Not found" 404
+	}
+}
+
 
 voiretmanger.fr {
 	root * /var/www/voiretmanger.fr
@@ -84,6 +91,7 @@ files.voiretmanger.fr {
 		output file /var/log/caddy/files.voiretmanger.fr.access.log
 	}
 	import static
+	import 404
 }
 
 memoire.nicolasfurno.fr {
@@ -95,4 +103,5 @@ memoire.nicolasfurno.fr {
 	}
 	import static
 	import security
+	import 404
 }
