@@ -46,15 +46,19 @@ www.nicoflo.fr {
 	}
 }
 
+(logs) {
+    log {
+        output file /var/log/caddy/access.{host}.log
+    }
+}
+
 voiretmanger.fr {
 	root * /var/www/voiretmanger.fr
 	encode zstd gzip
 	file_server
 	import static
 	import security
-	log {
-		output file /var/log/caddy/voiretmanger.fr.access.log
-	}
+	import logs
 
 	# Redirect personnels
 	redir /a-propos/publicite /soutien
