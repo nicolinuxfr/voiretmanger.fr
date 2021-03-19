@@ -48,7 +48,7 @@ www.nicoflo.fr {
 
 (logs) {
     log {
-        output file /var/log/caddy/access.{args.0}.log
+        output file /var/log/caddy/{args.0}.log
     }
 }
 
@@ -58,7 +58,7 @@ voiretmanger.fr {
 	file_server
 	import static
 	import security
-	import logs voiretmanger.fr
+	import logs {host}
 
 	# Redirect personnels
 	redir /a-propos/publicite /soutien
