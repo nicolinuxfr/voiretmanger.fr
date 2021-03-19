@@ -58,7 +58,7 @@ voiretmanger.fr {
 	file_server
 	import static
 	import security
-	import logs {host}
+	import logs voiretmanger.fr
 
 	# Redirect personnels
 	redir /a-propos/publicite /soutien
@@ -84,9 +84,7 @@ dev.voiretmanger.fr {
 	file_server
 	import static
 	import security
-	log {
-		output file /var/log/caddy/dev.voiretmanger.fr.access.log
-	}
+	import logs dev.voiretmanger.fr
     php_fastcgi unix//run/php/php8-fpm-caddy.sock
 }
 
@@ -94,9 +92,7 @@ files.voiretmanger.fr {
 	root * /var/www/files.voiretmanger.fr
 	encode zstd gzip
 	file_server browse
-	log {
-		output file /var/log/caddy/files.voiretmanger.fr.access.log
-	}
+	import logs files.voiretmanger.fr
 	import static
 	import 404
 }
@@ -105,9 +101,7 @@ memoire.nicolasfurno.fr {
 	root * /var/www/memoire.nicolasfurno.fr
 	encode zstd gzip
 	file_server
-	log {
-		output file /var/log/caddy/memoire.nicolasfurno.fr.access.log
-	}
+	import logs memoire.nicolasfurno.fr
 	import static
 	import 404
 }
