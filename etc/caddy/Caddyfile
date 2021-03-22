@@ -1,6 +1,10 @@
 {
 	email nicolinux@gmail.com
-	experimental_http3
+	servers {
+		protocol {
+			experimental_http3
+		}
+	}
 }
 
 www.voiretmanger.fr,
