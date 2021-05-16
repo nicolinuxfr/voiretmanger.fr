@@ -109,3 +109,8 @@ memoire.nicolasfurno.fr {
 	import static
 	import 404
 }
+
+tesla.nicoflo.fr {
+	reverse_proxy localhost:4000
+	import logs tesla.nicoflo.fr
+}
