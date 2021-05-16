@@ -111,6 +111,9 @@ memoire.nicolasfurno.fr {
 }
 
 tesla.nicoflo.fr {
+	basicauth * {
+		nicoflo JDJhJDE0JEMxV08ySWVEeVZRZk9Ickt1ZnhhdnVaUE55UnB6M1ZGQmxwaWNXajZ5UFNJak52SnpxLnhh
+	}
 	reverse_proxy localhost:4000
 	route /grafana/* {
 		reverse_proxy localhost:3000
