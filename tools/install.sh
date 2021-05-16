@@ -73,6 +73,17 @@ cd /tmp
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
+echo "======== Installation de Docker ========"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt update
+apt -y install docker-ce docker-compose
+systemctl enable docker
+
+mkdir ~/teslamate
+ln -sf $CONFIG/home/teslamate/docker-compose.yml ~/teslamate/docker-compose.yml
+
+
 echo "======== Configuration du pare-feu ========"
 ufw allow ssh
 ufw allow http
