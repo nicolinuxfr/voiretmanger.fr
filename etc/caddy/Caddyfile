@@ -113,7 +113,7 @@ memoire.nicolasfurno.fr {
 tesla.nicoflo.fr {
 	reverse_proxy localhost:4000
 	route /grafana/* {
-		reverse_proxy localhost:4000
+		reverse_proxy localhost:3000
 	}
 	import logs tesla.nicoflo.fr
 }
