@@ -38,7 +38,7 @@ chown -R caddy:caddy /var/log/caddy
 echo "======== Installation de PHP 7.4 ========"
 add-apt-repository -y ppa:ondrej/php
 apt update
-apt -y install php8.0 php8.0-{bcmath,cli,curl,fpm,gd,imagick,json,mbstring,mysql,xml,xmlrpc,zip} imagemagick
+apt -y install php8.0 php8.0-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
 # Fichier de configuration
 ln -sf $CONFIG/etc/php/conf.d/*.ini /etc/php/8.0/fpm/conf.d
