@@ -76,7 +76,7 @@ voiretmanger.fr {
     }
 
     route @cache {
-        try_files /wp-content/cache/cache-enabler/{host}{uri}/https-index.html /wp-content/cache/cache-enabler/{host}{uri}/index.html {path} {path}/index.php?{query}
+        try_files /wp-content/cache/cache-enabler/{host}{uri}/ /wp-content/cache/cache-enabler/{host}{uri}/ {path} {path}/index.php?{query}
     }
 
     php_fastcgi unix//run/php/php8-fpm-caddy.sock
