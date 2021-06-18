@@ -20,7 +20,7 @@ alias df='df -h'
 alias files="find . -type f | wc -l"
 
 # LOGS
-alias logs="tail -f /var/log/caddy/voiretmanger.fr.access.log | jq"
+alias logs="tail -f /var/log/caddy/voiretmanger.fr.log | jq"
 alias syslog="tail -f /var/log/syslog"
 
 # SERVICES
