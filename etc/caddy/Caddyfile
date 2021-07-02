@@ -54,7 +54,7 @@ www.nicolinux.fr,
 nicoflo.fr,
 www.nicoflo.fr {
 	import security
-	redir https://voiretmanger.fr{uri}/
+	redir https://voiretmanger.fr{uri}
 }
 
 voiretmanger.fr {
