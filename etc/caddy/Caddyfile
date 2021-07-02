@@ -7,20 +7,6 @@
 	}
 }
 
-www.voiretmanger.fr,
-blog.voiretmanger.fr,
-nicolasfurno.fr,
-www.nicolasfurno.fr,
-blog.nicolasfurno.fr,
-nicolinux.fr,
-blog.nicolinux.fr,
-www.nicolinux.fr,
-nicoflo.fr,
-www.nicoflo.fr {
-	redir https://voiretmanger.fr{uri}/
-	import security
-}
-
 (static) {
 	@static {
 		file
@@ -55,6 +41,20 @@ www.nicoflo.fr {
     log {
         output file /var/log/caddy/{args.0}.log
     }
+}
+
+www.voiretmanger.fr,
+blog.voiretmanger.fr,
+nicolasfurno.fr,
+www.nicolasfurno.fr,
+blog.nicolasfurno.fr,
+nicolinux.fr,
+blog.nicolinux.fr,
+www.nicolinux.fr,
+nicoflo.fr,
+www.nicoflo.fr {
+	redir https://voiretmanger.fr{uri}/
+	import security
 }
 
 voiretmanger.fr {
