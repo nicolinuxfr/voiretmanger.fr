@@ -53,8 +53,8 @@ blog.nicolinux.fr,
 www.nicolinux.fr,
 nicoflo.fr,
 www.nicoflo.fr {
-	redir https://voiretmanger.fr{uri}/
 	import security
+	redir https://voiretmanger.fr{uri}/
 }
 
 voiretmanger.fr {
