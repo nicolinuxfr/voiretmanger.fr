@@ -18,7 +18,7 @@
 (security) {
 	header {
 		# enable HSTS
-		Strict-Transport-Security max-age=63072000; includeSubDomains; preload
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 		# disable clients from sniffing the media type
 		X-Content-Type-Options nosniff
 		# keep referrer data off of HTTP connections
