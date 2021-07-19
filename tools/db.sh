@@ -18,6 +18,7 @@ cd /var/www/voiretmanger.fr/
 /usr/local/bin/wp --allow-root db export - | gzip > $FOLDER/$DATE.sql.gz
 
 # Backup Teslamate
+echo "Sauvegarde de la base de données Teslamate"
 
 cd /home/ubuntu/teslamate
 /usr/bin/docker-compose exec -T database pg_dump -U nicoflo teslamate | gzip > $FOLDER/teslamate_$DATE.bck.gz
