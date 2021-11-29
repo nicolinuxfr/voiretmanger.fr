@@ -3,7 +3,7 @@
 # Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 20.04 LTS.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
-CONFIG="/home/ubuntu/config"
+GIT="/home/ubuntu/config"
 
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "en_US.UTF-8"
@@ -13,15 +13,23 @@ echo "======== Mise à jour initiale ========"
 apt update
 apt -y upgrade
 apt -y dist-upgrade
-apt -y install libcap2-bin jq
+apt -y install libcap2-bin jq unzip fail2ban
+
+
+echo "======== Configuration de l'IPv6 ========"
+
+ln -sf $GIT/etc/netplan/51-cloud-init-ipv6.yaml /etc/netplan/
+netplan apply
+
 
 echo "======== Installation de Caddy ========"
-echo "deb [trusted=yes] https://apt.fury.io/caddy/ /" \
-    | sudo tee -a /etc/apt/sources.list.d/caddy-fury.list
-apt update
-apt install caddy
+apt install -y debian-keyring debian-archive-keyring apt-transport-https
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo apt-key add -
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee -a /etc/apt/sources.list.d/caddy-stable.list
+apt -y update
+apt -y install caddy
 
-cp -rf $CONFIG/etc/caddy/Caddyfile /etc/caddy/
+cp -rf $GIT/etc/caddy/Caddyfile /etc/caddy/
 chown caddy:caddy /etc/caddy/Caddyfile
 chmod 444 /etc/caddy/Caddyfile
 
@@ -35,18 +43,33 @@ su ubuntu -c 'mkdir ~/backup'
 mkdir -p /var/log/caddy
 chown -R caddy:caddy /var/log/caddy
 
-echo "======== Installation de PHP 7.4 ========"
+echo "======== Installation de PHP ========"
 add-apt-repository -y ppa:ondrej/php
 apt update
-apt -y install php8.0 php8.0-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
+apt -y install php8.1 php8.1-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
 # Fichier de configuration
-ln -sf $CONFIG/etc/php/conf.d/*.ini /etc/php/8.0/fpm/conf.d
-ln -sf $CONFIG/etc/php/pool.d/*.conf /etc/php/8.0/fpm/pool.d
+ln -sf $GIT/etc/php/conf.d/*.ini /etc/php/8.1/fpm/conf.d
+ln -sf $GIT/etc/php/pool.d/*.conf /etc/php/8.1/fpm/pool.d
 
-systemctl restart php8.0-fpm
+systemctl restart php8.1-fpm
 
 usermod -a -G www-data ubuntu
+
+### Logrotate pour les log du pool Caddy
+tee -a /etc/logrotate.d/php-caddy <<EOF
+/var/log/php-caddy.access.log {
+        rotate 12
+        weekly
+        missingok
+        notifempty
+        compress
+        delaycompress
+        postrotate
+                /usr/lib/php/php8.0-fpm-reopenlogs
+        endscript
+}
+EOF
 
 echo "======== Installation de MySQL ========"
 apt -y install mysql-server
@@ -65,10 +88,9 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
-su ubuntu -c 'ln -s $CONFIG/home/.wp-cli ~/'
+su ubuntu -c 'ln -s $GIT/home/.wp-cli ~/'
 
 echo "======== Installation de Composer ========"
-apt -y install unzip
 cd /tmp
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
@@ -81,8 +103,7 @@ apt -y install docker-ce docker-compose
 systemctl enable docker
 
 mkdir ~/teslamate
-ln -sf $CONFIG/home/teslamate/docker-compose.yml ~/teslamate/docker-compose.yml
-
+ln -sf $GIT/home/teslamate/docker-compose.yml ~/teslamate/docker-compose.yml
 
 echo "======== Configuration du pare-feu ========"
 ufw allow ssh
@@ -91,7 +112,6 @@ ufw allow https
 ufw enable
 
 echo "======== Configuration du SWAP ========"
-# Configuration d'un espace swap (merci Composer…)
 fallocate -l 2G /swapfile
 chmod 600 /swapfile
 mkswap /swapfile
@@ -104,8 +124,8 @@ apt-get -y install zsh
 
 su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended' 
 
-su ubuntu -c 'ln -sf $CONFIG/home/.alias ~/.alias'
-su ubuntu -c 'ln -sf $CONFIG/home/.zshrc ~/.zshrc'
+su ubuntu -c 'ln -sf $GIT/home/.alias ~/.alias'
+su ubuntu -c 'ln -sf $GIT/home/.zshrc ~/.zshrc'
 
 chsh -s $(which zsh) ubuntu
 
@@ -115,9 +135,22 @@ chsh -s $(which zsh) ubuntu
 touch /var/log/mysql/backup.log
 chown ubuntu:ubuntu /var/log/mysql/backup.log
 
+### Logrotate pour les log de backup
+tee -a /etc/logrotate.d/backup <<EOF
+/var/log/backup.log {
+    rotate 6
+    daily
+    missingok
+    dateext
+    copytruncate
+    notifempty
+    compress
+}
+EOF
+
 ### Création du cron
 tee -a /etc/cron.d/refurb <<EOF
-0 0 * * * ubuntu $CONFIG/tools/db.sh > /var/log/mysql/backup.log 2>&1
+0 0 * * * ubuntu $GIT/tools/backup.sh > /var/log/mysql/backup.log 2>&1
 EOF
 
 

@@ -2,9 +2,9 @@
 
 # Script qui permet de mettre à jour la configuration depuis le dépôt et d'installer les fichiers au bon endroit.
 
-CONFIG="/home/ubuntu/config"
+GIT="/home/ubuntu/config"
 
-cd $CONFIG
+cd $GIT
 git pull origin
 
 # Installation de la nouvelle version du fichier Caddyfile

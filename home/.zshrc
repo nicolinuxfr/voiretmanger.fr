@@ -90,5 +90,5 @@ export LANGUAGE="en_US.UTF-8"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export CONFIG="/home/ubuntu/config"
+export GIT="/home/ubuntu/config"
 
