@@ -5,16 +5,16 @@ $TTL 86400
 			   IN MX     100 mxb.ovh.net.
 			   IN MX     1 mx1.ovh.net.
 			   IN MX     5 mx2.ovh.net.
-			   IN A      51.210.254.29
-			   IN AAAA   2001:41d0:304:200::da00
+			   IN A      141.95.159.51
+			   IN AAAA   2001:41d0:304:200::83ae
 		   600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
-blog           IN A      51.210.254.29
-blog           IN AAAA   2001:41d0:304:200::da00
+blog           IN A      141.95.159.51
+blog           IN AAAA   2001:41d0:304:200::83ae
 ftp            IN CNAME  ftp.mediaplan.ovh.net.
 mail           IN CNAME  ns0.ovh.net.
-memoire        IN A      51.210.254.29
-memoire        IN AAAA   2001:41d0:304:200::da00
+memoire        IN A      141.95.159.51
+memoire        IN AAAA   2001:41d0:304:200::83ae
 pop3           IN CNAME  ns0.ovh.net.
 smtp           IN CNAME  ns0.ovh.net.
-www            IN A      51.210.254.29
-www            IN AAAA   2001:41d0:304:200::da00
+www            IN A      141.95.159.51
+www            IN AAAA   2001:41d0:304:200::83ae
