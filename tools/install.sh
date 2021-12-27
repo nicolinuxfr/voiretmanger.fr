@@ -102,7 +102,7 @@ apt update
 apt -y install docker-ce docker-compose
 systemctl enable docker
 
-mkdir ~/teslamate
+mkdir /home/ubuntu/teslamate
 ln -sf $GIT/home/teslamate/docker-compose.yml ~/teslamate/docker-compose.yml
 
 echo "======== Configuration du pare-feu ========"
@@ -149,8 +149,8 @@ tee -a /etc/logrotate.d/backup <<EOF
 EOF
 
 ### Création du cron
-tee -a /etc/cron.d/refurb <<EOF
-0 0 * * * ubuntu $GIT/tools/backup.sh > /var/log/mysql/backup.log 2>&1
+tee -a /etc/cron.d/backup <<EOF
+0 0 * * * root $GIT/tools/backup.sh > /var/log/mysql/backup.log 2>&1
 EOF
 
 
@@ -171,14 +171,14 @@ echo "\n======== Script d'installation terminé ========\n\n\n"
 
 echo "Ouvrez une nouvelle session avec ce même compte pour bénéficier de tous les changements.\n\n "
 
-echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant ces commandes depuis le précédent serveur : \n"
+echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant ces commandes depuis le précédent serveur : "
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/www/* root@$IP:/var/www\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/www/* ubuntu@$IP:/var/www"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/lib/caddy/.local/share/caddy/* root@$IP:/var/lib/caddy/.local/share/caddy\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/lib/caddy/.local/share/caddy/* ubuntu@$IP:/var/lib/caddy/.local/share/caddy"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup/* root@$IP:~/backup\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup/* root@$IP:~/backup"
 
-echo "wp --allow-root db export - > ~/dump.sql\n"
+echo "wp --allow-root db export - > ~/dump.sql"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/dump.sql root@$IP:~/\n"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/dump.sql root@$IP:~/"
