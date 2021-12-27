@@ -10,7 +10,7 @@ Le script installe ces outils sur une base d'Ubuntu 20.04 :
 
 - Serveur web :
     - [Caddy 2](https://caddyserver.com) ;
-    - PHP 7.4 ;
+    - PHP 8.1 ;
     - MySQL 8 ;
     - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :
