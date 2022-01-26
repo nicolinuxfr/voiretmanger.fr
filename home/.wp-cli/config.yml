@@ -1,2 +1,7 @@
-path: /var/www/voiretmanger.fr
-url: https://voiretmanger.fr
+@vm:
+  path: /var/www/voiretmanger.fr
+  url: https://voiretmanger.fr
+
+@vmdev:
+  path: /var/www/dev.voiretmanger.fr
+  url: https://dev.voiretmanger.fr
