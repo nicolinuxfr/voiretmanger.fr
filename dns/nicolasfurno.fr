@@ -1,20 +1,27 @@
-$TTL 86400
-@	IN SOA dns106.ovh.net. tech.ovh.net. (2020091200 86400 3600 3600000 300)
-			   IN NS     ns106.ovh.net.
-			   IN NS     dns106.ovh.net.
-			   IN MX     100 mxb.ovh.net.
-			   IN MX     1 mx1.ovh.net.
-			   IN MX     5 mx2.ovh.net.
-			   IN A      141.95.159.51
-			   IN AAAA   2001:41d0:304:200::83ae
-		   600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
-blog           IN A      141.95.159.51
-blog           IN AAAA   2001:41d0:304:200::83ae
-ftp            IN CNAME  ftp.mediaplan.ovh.net.
-mail           IN CNAME  ns0.ovh.net.
-memoire        IN A      141.95.159.51
-memoire        IN AAAA   2001:41d0:304:200::83ae
-pop3           IN CNAME  ns0.ovh.net.
-smtp           IN CNAME  ns0.ovh.net.
-www            IN A      141.95.159.51
-www            IN AAAA   2001:41d0:304:200::83ae
+$TTL 600
+@	IN SOA dns106.ovh.net. tech.ovh.net. (2022021514 86400 3600 3600000 300)
+                                                IN NS     ns106.ovh.net.
+                                                IN NS     dns106.ovh.net.
+                                                IN MX     5 mx2.ovh.net.
+                                                IN MX     1 mx1.ovh.net.
+                                                IN MX     100 mxb.ovh.net.
+                                             60 IN A      185.199.108.153
+                                                IN A      185.199.110.153
+                                                IN A      185.199.111.153
+                                                IN A      185.199.109.153
+                                                IN AAAA   2606:50c0:8000::153
+                                                IN AAAA   2606:50c0:8003::153
+                                                IN AAAA   2606:50c0:8002::153
+                                                IN AAAA   2606:50c0:8001::153
+                                            600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
+_github-pages-challenge-nicolinuxfr          60 IN TXT    "428286e517a28584fee865f6c72b9e"
+_github-pages-challenge-nicolinuxfr.blog     60 IN TXT    "091bc8b395944336965e14b4895675"
+blog                                            IN A      141.95.159.51
+blog                                            IN AAAA   2001:41d0:304:200::83ae
+ftp                                             IN CNAME  ftp.mediaplan.ovh.net.
+mail                                            IN CNAME  ns0.ovh.net.
+memoire                                         IN A      141.95.159.51
+memoire                                         IN AAAA   2001:41d0:304:200::83ae
+pop3                                            IN CNAME  ns0.ovh.net.
+smtp                                            IN CNAME  ns0.ovh.net.
+www                                             IN CNAME  nicolinuxfr.github.io.
