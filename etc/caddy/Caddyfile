@@ -67,6 +67,8 @@ voiretmanger.fr {
 	redir /a-propos/publicite /soutien
 	redir /archives/carte-des-restaurants /a-manger
 
+	redir /feed/ https://nicolasfurno.fr/index.xml
+
 	php_fastcgi unix//run/php/php-caddy.sock
 }
 
