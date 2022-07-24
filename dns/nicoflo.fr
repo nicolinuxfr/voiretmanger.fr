@@ -21,8 +21,10 @@ smtp                      IN CNAME  ssl0.ovh.net.
 www                       IN MX     10 mx3.mail.ovh.net.
 www                       IN MX     1 mx4.mail.ovh.net.
 tesla                     IN A      141.95.159.51
+ui                     IN A      141.95.159.51
 www                       IN A      141.95.159.51
 www                       IN AAAA   2001:41d0:304:200::83ae
 tesla                     IN AAAA   2001:41d0:304:200::83ae
+ui                     IN AAAA   2001:41d0:304:200::83ae
 www                       IN TXT    "3|welcome"
 www                       IN TXT    "l|fr"

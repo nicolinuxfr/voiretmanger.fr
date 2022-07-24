@@ -112,3 +112,8 @@ tesla.nicoflo.fr {
 	}
 	import logs tesla.nicoflo.fr
 }
+
+ui.nicoflo.fr {
+	reverse_proxy localhost:8443
+	import logs ui.nicoflo.fr
+}
