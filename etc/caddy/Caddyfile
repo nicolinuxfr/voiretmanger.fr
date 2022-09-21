@@ -1,10 +1,5 @@
 {
-	email nicolinux@gmail.com
-	servers {
-		protocol {
-			experimental_http3
-		}
-	}
+email nicolinux@gmail.com
 }
 
 (static) {
