@@ -63,8 +63,19 @@ services:
       - mosquitto-conf:/mosquitto/config
       - mosquitto-data:/mosquitto/data
 
+  portainer:
+    image: portainer/portainer
+    restart: always
+    ports:
+      - 9000:9000
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+
 volumes:
   teslamate-db:
   teslamate-grafana-data:
   mosquitto-conf:
   mosquitto-data:
+  portainer-data:
