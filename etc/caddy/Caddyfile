@@ -118,6 +118,6 @@ ui.nicoflo.fr {
 }
 
 portainer.nicoflo.fr {
-	reverse_proxy https://127.0.0.1:9000
+	reverse_proxy localhost:9000
 	import logs portainer.nicoflo.fr
 }
