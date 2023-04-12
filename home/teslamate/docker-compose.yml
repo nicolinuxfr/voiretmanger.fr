@@ -52,8 +52,8 @@ services:
       - 3000:3000
     volumes:
       - teslamate-grafana-data:/var/lib/grafana
-      - ~/teslamate/dashboards/customdashboards.yml:/etc/grafana/provisioning/dashboards/customdashboards.yml
-      - ~/teslamate/dashboards/dashboards:/TeslamateCustomDashboards
+      - ~/teslamate/Teslamate-CustomGrafanaDashboards/customdashboards.yml:/etc/grafana/provisioning/dashboards/customdashboards.yml
+      - ~/teslamate/Teslamate-CustomGrafanaDashboards/dashboards:/TeslamateCustomDashboards
 
   mosquitto:
     image: eclipse-mosquitto:2
