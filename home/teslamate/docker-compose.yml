@@ -12,7 +12,7 @@ services:
       - DATABASE_PASS=${TM_DB_PASS}
       - DATABASE_NAME=${TM_DB_NAME}
       - DATABASE_HOST=database
-      - MQTT_HOST=mosquitto
+      - MQTT_HOST=${MQTT_HOST}
       - MQTT_USERNAME=${MQTT_NAME}
       - MQTT_PASSWORD=${MQTT_PASS}
       - VIRTUAL_HOST=${FQDN_TM}
@@ -57,16 +57,6 @@ services:
       - /home/ubuntu/teslamate/Teslamate-CustomGrafanaDashboards/customdashboards.yml:/etc/grafana/provisioning/dashboards/customdashboards.yml
       - /home/ubuntu/teslamate/Teslamate-CustomGrafanaDashboards/dashboards:/TeslamateCustomDashboards
 
-  mosquitto:
-    image: eclipse-mosquitto:2
-    restart: always
-    command: mosquitto -c /mosquitto-no-auth.conf
-    ports:
-      - 127.0.0.1:1883:1883
-    volumes:
-      - mosquitto-conf:/mosquitto/config
-      - mosquitto-data:/mosquitto/data
-
   portainer:
     image: portainer/portainer
     restart: always
@@ -80,6 +70,5 @@ services:
 volumes:
   teslamate-db:
   teslamate-grafana-data:
-  mosquitto-conf:
   mosquitto-data:
   portainer-data:
