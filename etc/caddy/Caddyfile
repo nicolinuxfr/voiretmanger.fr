@@ -105,6 +105,9 @@ tesla.nicoflo.fr {
 	route /grafana/* {
 		reverse_proxy localhost:3000
 	}
+	route /mosquitto/* {
+		reverse_proxy localhost:1883
+	}
 	import logs tesla.nicoflo.fr
 }
 

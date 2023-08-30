@@ -13,6 +13,8 @@ services:
       - DATABASE_NAME=${TM_DB_NAME}
       - DATABASE_HOST=database
       - MQTT_HOST=mosquitto
+      - MQTT_USERNAME=${MQTT_NAME}
+      - MQTT_PASSWORD=${MQTT_PASS}
       - VIRTUAL_HOST=${FQDN_TM}
       - CHECK_ORIGIN=true
       - TZ=${TM_TZ}
