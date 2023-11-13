@@ -5,13 +5,13 @@ alias apt="sudo apt"
 alias tail="sudo tail"
 alias mysql="sudo mysql"
 alias wp="wp --allow-root"
-alias docker-compose="sudo docker-compose"
+alias docker-compose="sudo docker compose"
 
 # GESTION SERVEUR
 alias maj="apt update && apt list --upgradable"
 alias Maj="apt upgrade"
 alias majConf="sudo ~/config/tools/majConf.sh"
-alias majTeslamate="cd ~/teslamate && sudo docker-compose exec -T database pg_dump -U nicoflo teslamate  | gzip > /home/ubuntu/backup/teslamate.bck.gz && sudo docker-compose pull && sudo docker-compose up -d"
+alias majTeslamate="cd ~/teslamate && sudo docker compose exec -T database pg_dump -U nicoflo teslamate  | gzip > /home/ubuntu/backup/teslamate.bck.gz && sudo docker compose pull && sudo docker compose up -d"
 alias db="~/config/tools/db.sh"
 alias cache="find /var/www/voiretmanger.fr/wp-content/cache/cache-enabler/voiretmanger.fr -type f | wc -l"
 
