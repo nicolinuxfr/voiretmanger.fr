@@ -2,7 +2,7 @@
 
 # Script qui permet de mettre à jour la configuration depuis le dépôt et d'installer les fichiers au bon endroit.
 
-GIT="/home/ubuntu/config"
+GIT="/home/debian/config"
 
 cd $GIT
 git pull origin

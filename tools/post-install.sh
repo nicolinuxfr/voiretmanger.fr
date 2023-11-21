@@ -3,7 +3,7 @@
 # Ce script doit être exécuté après le script "install.sh" ET APRÈS AVOIR TRANSFÉRÉ LES FICHIERS dans /var/www/ et les clés SSH dans /var/lib/caddy/.local/share/caddy/
 # Il considère aussi que la base de données à importer est à la racine du dossier utilisateur : ~/dump.sql
 
-HOME="/home/ubuntu"
+HOME="/home/debian"
 
 echo "Préparation de la base de données"
 

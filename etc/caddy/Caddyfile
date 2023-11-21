@@ -119,8 +119,3 @@ ui.nicoflo.fr {
 	}
 	import logs ui.nicoflo.fr
 }
-
-portainer.nicoflo.fr {
-	reverse_proxy localhost:9000
-	import logs portainer.nicoflo.fr
-}

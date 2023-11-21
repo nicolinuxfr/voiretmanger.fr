@@ -2,7 +2,7 @@
 # Script d'optimisation et de sauvegarde de la base de données. Repose sur WP-CLI. 
 
 DATE=`date +%Y-%m-%d`
-FOLDER='/home/ubuntu/backup'
+FOLDER='/home/debian/backup'
 
 echo "Optimisation et sauvegarde de la base de données : $DATE"
 
@@ -20,11 +20,11 @@ cd /var/www/voiretmanger.fr/
 # Backup Teslamate
 echo "Sauvegarde de la base de données Teslamate"
 
-cd /home/ubuntu/teslamate
+cd /opt/teslamate
 /usr/bin/docker-compose exec -T database pg_dump -U nicoflo teslamate | gzip > $FOLDER/teslamate_$DATE.bck.gz
 
 # Permissions
-chown -R ubuntu:ubuntu $FOLDER
+chown -R debian:debian $FOLDER
 
 # Nettoyage des anciennes sauvegardes (5 derniers jours)
 find $FOLDER -maxdepth 1 -type f -mmin +7200 | xargs rm -rf

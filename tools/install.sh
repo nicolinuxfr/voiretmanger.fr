@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Ce script doit être exécuté sur un nouveau serveur, avec Ubuntu 20.04 LTS.
+# Ce script doit être exécuté sur un nouveau serveur, sous Debian 12.
 # PENSEZ À L'ADAPTER EN FONCTION DE VOS BESOINS
 
-GIT="/home/ubuntu/config"
+GIT="/home/debian/config"
 
 # Nécessaire pour éviter les erreurs de LOCALE par la suite
 locale-gen "en_US.UTF-8"
@@ -13,19 +13,15 @@ echo "======== Mise à jour initiale ========"
 apt update
 apt -y upgrade
 apt -y dist-upgrade
-apt -y install libcap2-bin jq unzip fail2ban
+apt -y install apt-transport-https ca-certificates curl software-properties-common libcap2-bin jq unzip
 
-
-echo "======== Configuration de l'IPv6 ========"
-
-ln -sf $GIT/etc/netplan/51-cloud-init-ipv6.yaml /etc/netplan/
-netplan apply
-
+echo "======== Nom de domaine ========"
+sudo hostnamectl set-hostname voiretmanger.fr
 
 echo "======== Installation de Caddy ========"
-apt install -y debian-keyring debian-archive-keyring apt-transport-https
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo apt-key add -
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee -a /etc/apt/sources.list.d/caddy-stable.list
+apt install -y debian-keyring debian-archive-keyring
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
 apt -y update
 apt -y install caddy
 
@@ -35,26 +31,26 @@ chmod 444 /etc/caddy/Caddyfile
 
 systemctl start caddy
 
-usermod -a -G caddy ubuntu
+usermod -a -G caddy debian
 
 echo "======== Création des dossiers nécessaires ========"
 
-su ubuntu -c 'mkdir ~/backup'
+su debian -c 'mkdir ~/backup'
 mkdir -p /var/log/caddy
 chown -R caddy:caddy /var/log/caddy
 
 echo "======== Installation de PHP ========"
 add-apt-repository -y ppa:ondrej/php
 apt update
-apt -y install php8.1 php8.1-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
+apt -y install php8.2 php8.2-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
 # Fichier de configuration
-ln -sf $GIT/etc/php/conf.d/*.ini /etc/php/8.1/fpm/conf.d
-ln -sf $GIT/etc/php/pool.d/*.conf /etc/php/8.1/fpm/pool.d
+ln -sf $GIT/etc/php/conf.d/*.ini /etc/php/8.2/fpm/conf.d
+ln -sf $GIT/etc/php/pool.d/*.conf /etc/php/8.2/fpm/pool.d
 
-systemctl restart php8.1-fpm
+systemctl restart php8.2-fpm
 
-usermod -a -G www-data ubuntu
+usermod -a -G www-data debian
 
 ### Logrotate pour les log du pool Caddy
 tee -a /etc/logrotate.d/php-caddy <<EOF
@@ -66,7 +62,7 @@ tee -a /etc/logrotate.d/php-caddy <<EOF
         compress
         delaycompress
         postrotate
-                /usr/lib/php/php8.0-fpm-reopenlogs
+                /usr/lib/php/php8.2-fpm-reopenlogs
         endscript
 }
 EOF
@@ -88,7 +84,7 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
-su ubuntu -c 'ln -s $GIT/home/.wp-cli ~/'
+su debian -c 'ln -s $GIT/home/.wp-cli ~/'
 
 echo "======== Installation de Composer ========"
 cd /tmp
@@ -96,23 +92,35 @@ curl -sS https://getcomposer.org/installer -o composer-setup.php
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 echo "======== Installation de Docker ========"
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-apt update
-apt -y install docker-ce docker-compose
-systemctl enable docker
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-mkdir /home/ubuntu/teslamate
-ln -sf $GIT/home/teslamate/docker-compose.yml ~/teslamate/docker-compose.yml
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
 
-echo "======== Configuration du pare-feu ========"
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+mkdir /opt/teslamate
+ln -sf $GIT/opt/teslamate/docker-compose.yml /opt/teslamate/docker-compose.yml
+git clone https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards.git /opt/teslamate/
+
+echo "======== Configuration de la sécurité ========"
+apt install -y ufw fail2ban
 ufw allow ssh
 ufw allow http
 ufw allow https
 ufw enable
 
 echo "======== Configuration du SWAP ========"
-fallocate -l 2G /swapfile
+fallocate -l 4G /swapfile
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
@@ -122,18 +130,18 @@ echo "======== Installation des quelques outils ========"
 echo "zsh et oh-my-zsh (Shell 2.0)"
 apt-get -y install zsh
 
-su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended' 
+su debian -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended' 
 
-su ubuntu -c 'ln -sf $GIT/home/.alias ~/.alias'
-su ubuntu -c 'ln -sf $GIT/home/.zshrc ~/.zshrc'
+su debian -c 'ln -sf $GIT/home/.alias ~/.alias'
+su debian -c 'ln -sf $GIT/home/.zshrc ~/.zshrc'
 
-chsh -s $(which zsh) ubuntu
+chsh -s $(which zsh) debian
 
 # Installation des crons automatiques
 
 ## Création des fichiers de log
 touch /var/log/mysql/backup.log
-chown ubuntu:ubuntu /var/log/mysql/backup.log
+chown debian:debian /var/log/mysql/backup.log
 
 ### Logrotate pour les log de backup
 tee -a /etc/logrotate.d/backup <<EOF
@@ -161,8 +169,8 @@ apt-get -y autoremove
 
 mkdir /var/www
 mkdir -p /var/lib/caddy/.local/share/caddy
-chown ubuntu:ubuntu /var/www
-chown ubuntu:ubuntu /var/lib/caddy/.local/share/caddy
+chown debian:debian /var/www
+chown debian:debian /var/lib/caddy/.local/share/caddy
 
 
 IP=`curl -sS ipecho.net/plain`
@@ -173,12 +181,12 @@ echo "Ouvrez une nouvelle session avec ce même compte pour bénéficier de tous
 
 echo "Vous pourrez ensuite transférer les données vers ce serveur en utilisant ces commandes depuis le précédent serveur : "
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/www/* ubuntu@$IP:/var/www"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/www/* debian@$IP:/var/www"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/lib/caddy/.local/share/caddy/* ubuntu@$IP:/var/lib/caddy/.local/share/caddy"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' /var/lib/caddy/.local/share/caddy/* debian@$IP:/var/lib/caddy/.local/share/caddy"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup/* root@$IP:~/backup"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/backup/* debian@$IP:~/backup"
 
 echo "wp --allow-root db export - > ~/dump.sql"
 
-echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/dump.sql root@$IP:~/"
+echo "rsync -aHAXxv --numeric-ids --delete --progress -e 'ssh -T -o Compression=no -x' ~/dump.sql debian@$IP:~/"
