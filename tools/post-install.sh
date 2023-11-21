@@ -7,7 +7,7 @@ HOME="/home/debian"
 
 echo "Préparation de la base de données"
 
-mariadb-secure-installation
+sudo mariadb-secure-installation
 
 echo "Saisir le mot de passe root mysql : "
 read passwdroot
