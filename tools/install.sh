@@ -67,10 +67,10 @@ tee -a /etc/logrotate.d/php-caddy <<EOF
 }
 EOF
 
-echo "======== Installation de MySQL ========"
-apt -y install mysql-server
+echo "======== Installation de MariaDB ========"
+apt -y install mariadb-server
 
-tee -a /etc/mysql/mysql.conf.d/binlog.cnf <<EOF
+tee -a /etc/mysql/mariadb.conf.d/binlog.cnf <<EOF
 [mysqld]
 disable_log_bin
 EOF
@@ -84,7 +84,7 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Fichier de configuration
-su debian -c 'ln -s $GIT/home/.wp-cli ~/'
+su debian -c 'ln -s /home/debian/config/home/.wp-cli ~/'
 
 echo "======== Installation de Composer ========"
 cd /tmp
@@ -132,8 +132,8 @@ apt-get -y install zsh
 
 su debian -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended' 
 
-su debian -c 'ln -sf $GIT/home/.alias ~/.alias'
-su debian -c 'ln -sf $GIT/home/.zshrc ~/.zshrc'
+su debian -c 'ln -sf /home/debian/config/home/.alias ~/.alias'
+su debian -c 'ln -sf /home/debian/config/home/.zshrc ~/.zshrc'
 
 chsh -s $(which zsh) debian
 

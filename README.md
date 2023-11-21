@@ -11,7 +11,7 @@ Le script installe ces outils sur une base de Debian 12:
 - Serveur web :
     - [Caddy 2](https://caddyserver.com) ;
     - PHP 8.2 ;
-    - MySQL 8 ;
+    - MariaDB ;
     - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :
     - ZSH et [oh-my-zsh](http://ohmyz.sh).
@@ -34,6 +34,7 @@ Le script d'installation est conçu pour être exécuté à partir d'un serveur 
 
 Clonez le dépôt à partir du dossier utilisateur qui servira à exécuter le script. Les configurations seront aussi stockées dans ce dossier et liées vers ce dossier, donc il ne faudra plus y toucher.
 
+    sudo apt-get install git
     git clone https://github.com/nicolinuxfr/config-server.git ~/config
 
 ### Lancer le script
