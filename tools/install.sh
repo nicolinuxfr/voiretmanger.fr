@@ -13,7 +13,7 @@ echo "======== Mise à jour initiale ========"
 apt update
 apt -y upgrade
 apt -y dist-upgrade
-apt -y install apt-transport-https ca-certificates curl software-properties-common libcap2-bin jq unzip
+apt -y install apt-transport-https ca-certificates curl software-properties-common libcap2-bin jq unzip htop
 
 echo "======== Nom de domaine ========"
 sudo hostnamectl set-hostname voiretmanger.fr
