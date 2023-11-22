@@ -15,7 +15,7 @@ cd /var/www/voiretmanger.fr/
 /usr/local/bin/wp --allow-root db optimize
 
 # Sauvegarde
-/usr/local/bin/wp --allow-root db export - | gzip > $FOLDER/$DATE.sql.gz
+/usr/local/bin/wp --allow-root db export - | gzip > $FOLDER/voiretmanger-$DATE.sql.gz
 
 # Backup Teslamate
 echo "Sauvegarde de la base de données Teslamate"

@@ -35,11 +35,11 @@ EOF
 service mysql restart
 
 echo "Réparation des permissions"
-chown -R caddy:caddy /var/www
-chmod -R g+w /var/www
-chmod -R 755 /var/www/voiretmanger.fr
-chown -R caddy:caddy /var/lib/caddy
-chmod -R 770 /var/lib/caddy/.local/share/caddy
+sudo chown -R caddy:caddy /var/www
+sudo chmod -R g+w /var/www
+sudo chmod -R 755 /var/www/voiretmanger.fr
+sudo chown -R caddy:caddy /var/lib/caddy
+sudo chmod -R 770 /var/lib/caddy/.local/share/caddy
 
 echo "Démarrage de Caddy"
 systemctl daemon-reload

@@ -112,6 +112,11 @@ mkdir /opt/teslamate
 ln -sf $GIT/opt/teslamate/docker-compose.yml /opt/teslamate/docker-compose.yml
 git clone https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards.git /opt/teslamate/
 
+echo "======== Installation de UniFi Network ========"
+# https://community.ui.com/questions/UniFi-Installation-Scripts-or-UniFi-Easy-Update-Script-or-UniFi-Lets-Encrypt-or-UniFi-Easy-Encrypt-/ccbc7530-dd61-40a7-82ec-22b17f027776
+wget https://get.glennr.nl/unifi/install/unifi-8.0.7.sh
+bash unifi-8.0.7.sh
+
 echo "======== Configuration de la sécurité ========"
 apt install -y ufw fail2ban
 ufw allow ssh
