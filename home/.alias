@@ -5,6 +5,7 @@ alias apt="sudo apt"
 alias tail="sudo tail"
 alias mysql="sudo mysql"
 alias wp="wp --allow-root"
+alias docker="sudo docker"
 alias docker-compose="sudo docker compose"
 
 # GESTION SERVEUR
