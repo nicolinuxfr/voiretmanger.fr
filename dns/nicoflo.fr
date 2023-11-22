@@ -1,13 +1,13 @@
 $TTL 3600
-@	IN SOA dns20.ovh.net. tech.ovh.net. (2021050900 86400 3600 3600000 300)
-                          IN NS     ns20.ovh.net.
+@	IN SOA dns20.ovh.net. tech.ovh.net. (2023111500 86400 3600 3600000 300)
                           IN NS     dns20.ovh.net.
+                          IN NS     ns20.ovh.net.
                           IN MX     10 mx3.mail.ovh.net.
                           IN MX     1 mx4.mail.ovh.net.
-                          IN A      141.95.159.51
-                          IN AAAA   2001:41d0:304:200::83ae
-                      600 IN TXT    "1|www.nicoflo.fr"
+                          IN A      51.83.98.167
+                          IN AAAA   2001:41d0:305:2100::714b
                       600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
+                      600 IN TXT    "1|www.nicoflo.fr"
 _autodiscover._tcp        IN SRV    0 0 443 mailconfig.ovh.net.
 _imaps._tcp               IN SRV    0 0 993 ssl0.ovh.net.
 _submission._tcp          IN SRV    0 0 465 ssl0.ovh.net.
@@ -18,13 +18,13 @@ imap                      IN CNAME  ssl0.ovh.net.
 mail                      IN CNAME  ssl0.ovh.net.
 pop3                      IN CNAME  ssl0.ovh.net.
 smtp                      IN CNAME  ssl0.ovh.net.
+tesla                     IN A      51.83.98.167
+tesla                     IN AAAA   2001:41d0:305:2100::714b
+ui                        IN A      51.83.98.167
+ui                        IN AAAA   2001:41d0:305:2100::714b
 www                       IN MX     10 mx3.mail.ovh.net.
 www                       IN MX     1 mx4.mail.ovh.net.
-tesla                     IN A      141.95.159.51
-ui                     IN A      141.95.159.51
-www                       IN A      141.95.159.51
-www                       IN AAAA   2001:41d0:304:200::83ae
-tesla                     IN AAAA   2001:41d0:304:200::83ae
-ui                     IN AAAA   2001:41d0:304:200::83ae
+www                       IN A      51.83.98.167
+www                       IN AAAA   2001:41d0:305:2100::714b
 www                       IN TXT    "3|welcome"
 www                       IN TXT    "l|fr"

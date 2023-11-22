@@ -5,8 +5,8 @@ $TTL 86400
 						 IN MX     5 mx2.ovh.net.
 						 IN MX     100 mxb.ovh.net.
 						 IN MX     1 mx1.ovh.net.
-						 IN A      141.95.159.51
-						 IN AAAA   2001:41d0:304:200::83ae
+						 IN A      51.83.98.167
+						 IN AAAA   2001:41d0:305:2100::714b
 					 600 IN TXT    "google-site-verification=QQNN1PGqN7oOZ3IzcmIm7RzwjPoMmMJ5UKr7gnw6d9k"
 					 600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
 _jabber._tcp             IN CNAME  _jabber._tcp.mediaplan.ovh.net.
@@ -14,11 +14,11 @@ _sip._udp                IN CNAME  _sip._udp.mediaplan.ovh.net.
 _xmpp-client._tcp        IN CNAME  _xmpp-client._tcp.mediaplan.ovh.net.
 _xmpp-server._tcp        IN CNAME  _xmpp-server._tcp.mediaplan.ovh.net.
 audio                    IN CNAME  audio.ovh.net.
-blog                     IN A      141.95.159.51
-blog                     IN AAAA   2001:41d0:304:200::83ae
+blog                     IN A      51.83.98.167
+blog                     IN AAAA   2001:41d0:305:2100::714b
 blog                 500 IN TXT    "1|voiretmanger.fr"
-files                    IN A      141.95.159.51
-files                    IN AAAA   2001:41d0:304:200::83ae
+files                    IN A      51.83.98.167
+files                    IN AAAA   2001:41d0:305:2100::714b
 ftp                      IN CNAME  ftp.cluster006.ovh.net.
 ftp2                     IN CNAME  anonymous.ftp.ovh.net.
 imp                      IN CNAME  imp.ovh.net.
@@ -30,6 +30,6 @@ sip                      IN CNAME  sip1.mediaplan.ovh.net.
 smtp                     IN CNAME  ns0.ovh.net.
 squirrel                 IN CNAME  squirrel.ovh.net.
 vpn                      IN CNAME  vpn.mediaplan.ovh.net.
-www                      IN A      141.95.159.51
-www                      IN AAAA   2001:41d0:304:200::83ae
-www.files                IN AAAA   2001:41d0:304:200::83ae
+www                      IN A      51.83.98.167
+www                      IN AAAA   2001:41d0:305:2100::714b
+www.files                IN AAAA   2001:41d0:305:2100::714b
