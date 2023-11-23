@@ -145,8 +145,8 @@ chsh -s $(which zsh) debian
 # Installation des crons automatiques
 
 ## Création des fichiers de log
-touch /var/log/mysql/backup.log
-chown debian:debian /var/log/mysql/backup.log
+touch /var/log/backup.log
+chown debian:debian /var/log/backup.log
 
 ### Logrotate pour les log de backup
 tee -a /etc/logrotate.d/backup <<EOF
@@ -163,7 +163,7 @@ EOF
 
 ### Création du cron
 tee -a /etc/cron.d/backup <<EOF
-0 0 * * * root $GIT/tools/backup.sh > /var/log/mysql/backup.log 2>&1
+0 0 * * * root $GIT/tools/backup.sh > /var/log/backup.log 2>&1
 EOF
 
 
