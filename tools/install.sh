@@ -16,7 +16,19 @@ apt -y dist-upgrade
 apt -y install apt-transport-https ca-certificates curl software-properties-common libcap2-bin jq unzip htop
 
 echo "======== Nom de domaine ========"
-sudo hostnamectl set-hostname voiretmanger.fr
+hostnamectl set-hostname voiretmanger.fr
+
+echo "======== Configuration de la sécurité ========"
+apt install -y ufw fail2ban
+ufw allow ssh
+ufw allow http
+ufw allow https
+ufw enable
+
+tee -a /etc/fail2ban/jail.d/defaults-debian.conf <<EOF
+backend = systemd
+EOF
+systemctl restart fail2ban
 
 echo "======== Installation de Caddy ========"
 apt install -y debian-keyring debian-archive-keyring
@@ -117,12 +129,7 @@ echo "======== Installation de UniFi Network ========"
 wget https://get.glennr.nl/unifi/install/unifi-8.0.7.sh
 bash unifi-8.0.7.sh
 
-echo "======== Configuration de la sécurité ========"
-apt install -y ufw fail2ban
-ufw allow ssh
-ufw allow http
-ufw allow https
-ufw enable
+
 
 echo "======== Configuration du SWAP ========"
 fallocate -l 4G /swapfile
