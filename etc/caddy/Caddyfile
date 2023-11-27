@@ -119,3 +119,7 @@ ui.nicoflo.fr {
 	}
 	import logs ui.nicoflo.fr
 }
+
+git.nicolasfurno.fr {
+	reverse_proxy localhost:3000
+}
