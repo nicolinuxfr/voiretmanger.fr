@@ -121,5 +121,5 @@ ui.nicoflo.fr {
 }
 
 git.nicolasfurno.fr {
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:3100
 }
