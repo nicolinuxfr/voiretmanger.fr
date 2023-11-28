@@ -24,7 +24,7 @@ alias files="find . -type f | wc -l"
 
 # LOGS
 alias logs="tail -f /var/log/caddy/voiretmanger.fr.log | jq"
-alias syslog="tail -f /var/log/syslog"
+alias syslog="journalctl -f"
 
 # SERVICES
 alias status="systemctl status"
