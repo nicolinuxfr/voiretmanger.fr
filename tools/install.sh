@@ -13,7 +13,7 @@ echo "======== Mise à jour initiale ========"
 apt update
 apt -y upgrade
 apt -y dist-upgrade
-apt -y install apt-transport-https ca-certificates curl software-properties-common libcap2-bin jq unzip htop
+apt -y install apt-transport-https ca-certificates curl software-properties-common libcap2-bin jq unzip htop cron
 
 echo "======== Nom de domaine ========"
 hostnamectl set-hostname voiretmanger.fr
@@ -88,6 +88,14 @@ disable_log_bin
 EOF
 
 systemctl restart mysql
+
+echo "======== Installation de Forgejo ========"
+wget --content-disposition https://code.forgejo.org/forgejo-contrib/-/packages/debian/forgejo-deb-repo/0-0/files/2890
+apt install ./forgejo-deb-repo_0-0_all.deb
+
+apt update
+apt upgrade
+apt -y install forgejo
 
 echo "======== Installation de WP-CLI ========"
 # Installation et déplacement au bon endroit
