@@ -23,6 +23,10 @@ echo "Sauvegarde de la base de données Teslamate"
 cd /opt/teslamate
 /usr/bin/docker compose exec -T database pg_dump -U nicoflo teslamate | gzip > $FOLDER/teslamate_$DATE.bck.gz
 
+# Backup UniFi
+echo "Récupération de la sauvegarde Unifi Network"
+rsync -avz /var/lib/unifi/backup/autobackup/ $FOLDER/unifi/
+
 # Permissions
 chown -R debian:debian $FOLDER
 
