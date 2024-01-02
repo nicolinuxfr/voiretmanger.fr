@@ -178,7 +178,7 @@ EOF
 
 ### Création du cron
 tee -a /etc/cron.d/backup <<EOF
-0 0 * * * root $GIT/tools/backup.sh > /var/log/backup.log 2>&1
+0 1 * * * root $GIT/tools/backup.sh > /var/log/backup.log 2>&1
 EOF
 
 
