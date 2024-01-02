@@ -31,4 +31,4 @@ rsync -avz /var/lib/unifi/backup/autobackup/ $FOLDER/unifi/
 chown -R debian:debian $FOLDER
 
 # Nettoyage des anciennes sauvegardes (5 derniers jours)
-find $FOLDER -maxdepth 1 -type f -mmin +7200 | xargs rm -rf
+find $FOLDER -maxdepth 2 -type f -mmin +7200 | xargs rm -rf
