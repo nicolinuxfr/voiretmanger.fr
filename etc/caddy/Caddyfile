@@ -40,7 +40,6 @@ email nicolinux@gmail.com
 
 www.voiretmanger.fr,
 blog.voiretmanger.fr,
-blog.nicolasfurno.fr,
 nicolinux.fr,
 blog.nicolinux.fr,
 www.nicolinux.fr,
@@ -48,6 +47,11 @@ nicoflo.fr,
 www.nicoflo.fr {
 	import security
 	redir https://voiretmanger.fr{uri}
+}
+
+blog.nicolasfurno.fr {
+	import security
+	redir https://nicolasfurno.fr{uri}
 }
 
 voiretmanger.fr {
