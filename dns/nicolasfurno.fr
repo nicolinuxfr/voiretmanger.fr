@@ -18,14 +18,14 @@ $TTL 600
 _atproto        IN TXT     "did=did:plc:cyinzaevnu64xiiehao3mk6d"
 _github-pages-challenge-nicolinuxfr     60 IN TXT     "428286e517a28584fee865f6c72b9e"
 _github-pages-challenge-nicolinuxfr.blog     60 IN TXT     "091bc8b395944336965e14b4895675"
-blog        IN A     141.95.159.51
-blog        IN AAAA     2001:41d0:304:200::83ae
+blog        IN A     51.83.98.167
+blog        IN AAAA     2001:41d0:305:2100::714b
 ftp        IN CNAME     ftp.mediaplan.ovh.net.
 git        IN A     51.83.98.167
 git        IN AAAA     2001:41d0:305:2100::714b
 mail        IN CNAME     ns0.ovh.net.
-memoire        IN A     141.95.159.51
-memoire        IN AAAA     2001:41d0:304:200::83ae
+memoire        IN A     51.83.98.167
+memoire        IN AAAA     2001:41d0:305:2100::714b
 pop3        IN CNAME     ns0.ovh.net.
 smtp        IN CNAME     ns0.ovh.net.
 twitter        IN CNAME     nicolinuxfr.github.io.
