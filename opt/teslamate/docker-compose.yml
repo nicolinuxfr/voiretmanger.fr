@@ -15,6 +15,7 @@ services:
       - MQTT_HOST=${MQTT_HOST}
       - MQTT_USERNAME=${MQTT_NAME}
       - MQTT_PASSWORD=${MQTT_PASS}
+      - MQTT_IPV6=${MQTT_IPV6}
       - VIRTUAL_HOST=${FQDN_TM}
       - CHECK_ORIGIN=true
       - TZ=${TM_TZ}
