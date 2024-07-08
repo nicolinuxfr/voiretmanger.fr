@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   teslamate:
     image: teslamate/teslamate:latest
