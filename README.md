@@ -10,7 +10,7 @@ Le script installe ces outils sur une base de Debian 12:
 
 - Serveur web :
     - [Caddy 2](https://caddyserver.com) ;
-    - PHP 8.2 ;
+    - PHP 8.3 ;
     - MariaDB ;
     - [WP-CLI](http://wp-cli.org/fr/) ;
 - Terminal :

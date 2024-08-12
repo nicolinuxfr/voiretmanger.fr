@@ -52,15 +52,16 @@ mkdir -p /var/log/caddy
 chown -R caddy:caddy /var/log/caddy
 
 echo "======== Installation de PHP ========"
-add-apt-repository -y ppa:ondrej/php
+sudo curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
+sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 apt update
-apt -y install php8.2 php8.2-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
+apt -y install php8.3 php8.3-{bcmath,cli,curl,fpm,gd,imagick,mbstring,mysql,xml,xmlrpc,zip} imagemagick
 
 # Fichier de configuration
-ln -sf $GIT/etc/php/conf.d/*.ini /etc/php/8.2/fpm/conf.d
-ln -sf $GIT/etc/php/pool.d/*.conf /etc/php/8.2/fpm/pool.d
+ln -sf $GIT/etc/php/conf.d/*.ini /etc/php/8.3/fpm/conf.d
+ln -sf $GIT/etc/php/pool.d/*.conf /etc/php/8.3/fpm/pool.d
 
-systemctl restart php8.2-fpm
+systemctl restart php8.3-fpm
 
 usermod -a -G www-data debian
 
@@ -74,7 +75,7 @@ tee -a /etc/logrotate.d/php-caddy <<EOF
         compress
         delaycompress
         postrotate
-                /usr/lib/php/php8.2-fpm-reopenlogs
+                /usr/lib/php/php8.3-fpm-reopenlogs
         endscript
 }
 EOF
@@ -131,12 +132,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 mkdir /opt/teslamate
 ln -sf $GIT/opt/teslamate/docker-compose.yml /opt/teslamate/docker-compose.yml
 git clone https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards.git /opt/teslamate/
-
-echo "======== Installation de UniFi Network ========"
-# https://community.ui.com/questions/UniFi-Installation-Scripts-or-UniFi-Easy-Update-Script-or-UniFi-Lets-Encrypt-or-UniFi-Easy-Encrypt-/ccbc7530-dd61-40a7-82ec-22b17f027776
-wget https://get.glennr.nl/unifi/install/unifi-8.0.7.sh
-bash unifi-8.0.7.sh
-
 
 
 echo "======== Configuration du SWAP ========"
