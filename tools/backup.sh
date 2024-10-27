@@ -26,5 +26,8 @@ cd /opt/teslamate
 # Permissions
 chown -R debian:debian $FOLDER
 
+# Redémarrage PHP pour éviter le bug intermittent
+systemctl restart php8.3-fpm
+
 # Nettoyage des anciennes sauvegardes (5 derniers jours)
 find $FOLDER -maxdepth 2 -type f -mmin +7200 | xargs rm -rf
