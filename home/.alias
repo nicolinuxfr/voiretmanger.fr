@@ -18,6 +18,7 @@ alias db="~/config/tools/db.sh"
 alias cache="find /var/www/voiretmanger.fr/wp-content/cache/cache-enabler/voiretmanger.fr -type f | wc -l"
 
 # FICHIERS
+alias la="sudo ls -lAh --color=auto"
 alias duf='sudo du -sh *'
 alias df='df -h'
 alias files="find . -type f | wc -l"
