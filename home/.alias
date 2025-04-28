@@ -32,3 +32,10 @@ alias restart="systemctl restart"
 alias reload="systemctl reload"
 alias start="systemctl start"
 alias stop="systemctl stop"
+
+# DOCKER
+alias dc="docker compose"
+alias dcu="docker compose up -d"
+alias dcd="docker compose down"
+alias dcp="docker compose pull"
+alias dcl="docker compose logs -f"
