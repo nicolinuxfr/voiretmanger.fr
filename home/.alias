@@ -8,6 +8,7 @@ alias wp="wp --allow-root"
 alias docker="sudo docker"
 alias docker-compose="sudo docker compose"
 alias htop="sudo htop"
+alias ufw="sudo ufw"
 
 # GESTION SERVEUR
 alias maj="apt update && apt list --upgradable"
