@@ -4,6 +4,6 @@ services:
         container_name: forgejo-runner
         user: 0:0
         volumes:
-            - ./data:/data
+            - data:/data
         restart: unless-stopped
         command: forgejo-runner -c /data/config.yml daemon
