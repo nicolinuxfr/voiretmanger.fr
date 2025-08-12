@@ -2,8 +2,6 @@ services:
     forgejo-runner:
         image: code.forgejo.org/forgejo/runner:9.0.3
         container_name: forgejo-runner
-        environment:
-            DOCKER_HOST: unix:///var/run/docker.sock
         user: 0:0
         volumes:
             - ./data:/data
