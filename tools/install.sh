@@ -133,6 +133,9 @@ mkdir /opt/teslamate
 ln -sf $GIT/opt/teslamate/docker-compose.yml /opt/teslamate/docker-compose.yml
 git clone https://github.com/jheredianet/Teslamate-CustomGrafanaDashboards.git /opt/teslamate/
 
+mkdir -p /opt/forgejo-runner/data
+ln -sf $GIT/opt/forgejo-runner/docker-compose.yml /opt/forgejo-runner/docker-compose.yml
+ln -sf $GIT/opt/forgejo-runner/data/config.yml /opt/forgejo-runner/data/config.yml
 
 echo "======== Configuration du SWAP ========"
 fallocate -l 4G /swapfile
