@@ -1,6 +1,7 @@
 services:
   teslamate:
     image: teslamate/teslamate:latest
+    container_name: teslamate
     restart: always
     depends_on:
       - database
@@ -9,7 +10,7 @@ services:
       - DATABASE_USER=${TM_DB_USER}
       - DATABASE_PASS=${TM_DB_PASS}
       - DATABASE_NAME=${TM_DB_NAME}
-      - DATABASE_HOST=database
+      - DATABASE_HOST=teslamate-db
       - MQTT_HOST=${MQTT_HOST}
       - MQTT_USERNAME=${MQTT_NAME}
       - MQTT_PASSWORD=${MQTT_PASS}
@@ -26,6 +27,7 @@ services:
 
   database:
     image: postgres:17
+    container_name: teslamate-db
     restart: always
     environment:
       - POSTGRES_USER=${TM_DB_USER}
@@ -36,12 +38,13 @@ services:
 
   grafana:
     image: teslamate/grafana:latest
+    container_name: teslamate-grafana
     restart: always
     environment:
       - DATABASE_USER=${TM_DB_USER}
       - DATABASE_PASS=${TM_DB_PASS}
       - DATABASE_NAME=${TM_DB_NAME}
-      - DATABASE_HOST=database
+      - DATABASE_HOST=teslamate-db
       - GRAFANA_PASSWD=${GRAFANA_PW}
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PW}
