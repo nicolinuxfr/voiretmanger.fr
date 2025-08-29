@@ -21,7 +21,7 @@ cd /var/www/voiretmanger.fr/
 echo "Sauvegarde de la base de données Teslamate"
 
 cd /opt/teslamate
-/usr/bin/docker compose exec -T database pg_dump -U nicoflo teslamate | gzip > $FOLDER/teslamate_$DATE.bck.gz
+/usr/bin/docker compose exec -T teslamate-db pg_dump -U nicoflo teslamate | gzip > $FOLDER/teslamate_$DATE.bck.gz
 
 # Permissions
 chown -R debian:debian $FOLDER
